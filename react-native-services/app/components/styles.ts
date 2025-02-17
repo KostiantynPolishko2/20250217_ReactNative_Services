@@ -6,5 +6,10 @@ export const StylesApp = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
+    },
+    flex1_center: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })

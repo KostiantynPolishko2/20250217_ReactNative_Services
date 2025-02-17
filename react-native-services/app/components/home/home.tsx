@@ -1,18 +1,29 @@
 import React, { FC } from "react";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
+import { StylesApp } from "../styles";
 
 const Home:FC = () => {
 
   const router = useRouter();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>home</Text>
+    <View style={styles.body}>
+      <Text style={styles.textRow}>home</Text>
       <Button title="Go Client" onPress={() => router.push('/components/client/client')} />
       <Button title="Go Seller" onPress={() => router.push('/components/seller/seller')} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    body: {
+        ...StylesApp.flex1_center,
+        backgroundColor: '#aed5db',
+    },
+    textRow: {
+        textAlign:'center',
+    }
+});
 
 export default Home;
