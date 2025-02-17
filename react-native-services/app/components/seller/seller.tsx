@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useRouter } from "expo-router";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { StylesApp } from "../styles";
 
 const Seller: FC = () => {

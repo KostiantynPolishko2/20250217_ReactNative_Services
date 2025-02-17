@@ -1,14 +1,11 @@
 import React, { FC } from "react";
-import { useRouter } from "expo-router";
-import { View, Text, StyleSheet} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { StylesApp } from "../styles";
 
-const Client: FC = () => {
-    const router = useRouter();
-
+const Order: FC = () => {
     return(
         <View style={styles.body}>
-            <Text style={styles.textRow}>client page</Text>
+            <Text style={styles.textRow}>order page</Text>
         </View>
     );
 };
@@ -16,11 +13,11 @@ const Client: FC = () => {
 const styles = StyleSheet.create({
     body: {
         ...StylesApp.flex1_center,
-        backgroundColor: '#dbf3a2',
+        backgroundColor: '#e7bf9e',
     },
     textRow: {
         textAlign:'center',
     }
 });
 
-export default Client;
+export default Order;

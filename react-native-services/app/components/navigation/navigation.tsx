@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Text, View, Button, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { StylesApp } from "../styles";
 
@@ -9,8 +9,10 @@ const Navigation: FC = () => {
 
     return(
         <View style={styles.body}>
-            <Button title="Client" onPress={() => router.push('/components/client/client')} color={'#639ec5'}/>
-            <Button title="Seller" onPress={() => router.push('/components/seller/seller')} color={'#639ec5'}/>
+            <Button title="products" onPress={() => router.push('/components/products/products')} color={'#639ec5'}/>
+            <Button title="order" onPress={() => router.push('/components/order/order')} color={'#639ec5'}/>
+            <Button title="client" onPress={() => router.push('/components/client/client')} color={'#639ec5'}/>
+            <Button title="seller" onPress={() => router.push('/components/seller/seller')} color={'#639ec5'}/>
         </View>
     );
 }

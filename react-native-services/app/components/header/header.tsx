@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         position: 'absolute',
-        left: 10,
+        left: 15,
     }
 });
 
