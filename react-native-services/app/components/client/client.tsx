@@ -9,7 +9,6 @@ const Client: FC = () => {
     return(
         <View style={styles.body}>
             <Text style={styles.textRow}>client page</Text>
-            <Button title="Go Home" onPress={() => router.push('/components/home/home')}/>
         </View>
     );
 };
@@ -17,7 +16,7 @@ const Client: FC = () => {
 const styles = StyleSheet.create({
     body: {
         ...StylesApp.flex1_center,
-        backgroundColor: '#d8d0a2',
+        backgroundColor: '#dbf3a2',
     },
     textRow: {
         textAlign:'center',

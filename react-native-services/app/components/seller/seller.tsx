@@ -9,7 +9,6 @@ const Seller: FC = () => {
     return(
         <View style={styles.body}>
             <Text style={styles.textRow}>seller page</Text>
-            <Button title="Go Home" onPress={() => router.push('/components/home/home')}/>
         </View>
     );
 };
