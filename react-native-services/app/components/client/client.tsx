@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { useRouter } from "expo-router";
 import { View, Text, StyleSheet, Button } from "react-native";
 
-const Seller: FC = () => {
+const Client: FC = () => {
     const router = useRouter();
 
     return(
         <View style={styles.body}>
-            <Text>seller page</Text>
-            <Button title="Go Home" onPress={() => router.push('../')}/>
+            <Text>client page</Text>
+            <Button title="Go Home" onPress={() => router.push('/components/home/home')}/>
         </View>
     );
 };
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#faffb8',
+        backgroundColor: '#d8d0a2',
     },
     textRow: {
         textAlign:'center',
     }
 });
 
-export default Seller;
+export default Client;
