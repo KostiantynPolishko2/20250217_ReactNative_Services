@@ -32,6 +32,13 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "This app needs camera access to take photos.",
+          "microphonePermission": "This app needs microphone access to record audio."
+        }
       ]
     ],
     "experiments": {
