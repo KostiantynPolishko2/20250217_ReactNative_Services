@@ -1,6 +1,7 @@
 import React, { FC, useState, useRef } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, CameraType, CameraView} from 'expo-camera';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { StylesApp } from '@/app/styles';
 
 interface IMobCamera {
@@ -11,8 +12,9 @@ interface IMobCamera {
     _cameraType?: CameraType,
 }
 
-const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 150}, _cameraType='front'}) => {
+const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 200}, _cameraType='front'}) => {
 
+    const [photoUri, setPhotoUri] = useState<string | null>(null);
     const [permission, setPermission] = useState<Boolean>(false)
     const [cameraType, setCameraType] = useState<CameraType>(_cameraType);
     const cameraRef = useRef<CameraView | null>(null);
@@ -21,6 +23,13 @@ const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 150}, _cameraTyp
         const { status } = await Camera.requestCameraPermissionsAsync();
         setPermission(status === 'granted');
     }
+
+    const captureImage = async () => {
+        if (cameraRef.current) {
+          const photo = await cameraRef.current.takePictureAsync();
+          setPhotoUri(photo?.uri? photo.uri: photoUri);
+        }
+    };
 
     // activate permission for camera
     if (!permission) {
@@ -52,14 +61,17 @@ const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 150}, _cameraTyp
                     color='#7fadc9'
                     onPress={() => setCameraType(prev => prev === 'front'? 'back' : 'front')}
                 />
-                <View style={styles.bodyTxt}>
-                    <Text style={styles.rowTxt}>OPTION</Text>
-                </View>
+                <TouchableOpacity style={styles.bodyTxt} onPress={captureImage}>
+                    <MaterialCommunityIcons name='camera' size={34} color='#cfd8dd'/>
+                </TouchableOpacity>
                 <Button
                     title='close'
                     color='#d6423d'
                     onPress={()=>{setPermission(false)}}
                 />
+            </View>
+            <View style={[StylesApp.flex_row, {justifyContent: 'center'}]}>
+                {photoUri && <Image source={{uri: photoUri}} style={styles.previewPhoto}/>}
             </View>
         </View>
     );
@@ -83,6 +95,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#737b83',
         borderColor: 'darkgrey',
         borderWidth: 1,
+    },
+    previewPhoto:{
+        width: 100, height: 100, margin: 5,
     }
 });
 
