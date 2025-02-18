@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
-import MyCamera  from "./camera/camera";
+// import MyCamera  from "./camera/mycamera";
+import MyCamera from "./camera/mycamera_gpt";
 
 export default function Index() {
   return (
@@ -11,7 +12,7 @@ export default function Index() {
         backgroundColor: '#c9d6cd',
       }}
     >
-      <Text>start page</Text>
+      <Text>CAMERA</Text>
       <MyCamera/>
     </View>
   );
