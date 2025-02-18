@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import MyCamera  from "./camera/camera";
 
 export default function Index() {
   return (
@@ -11,6 +12,7 @@ export default function Index() {
       }}
     >
       <Text>start page</Text>
+      <MyCamera/>
     </View>
   );
 }
