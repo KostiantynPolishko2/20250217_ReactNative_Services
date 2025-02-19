@@ -2,7 +2,7 @@ import React, { FC, useState, useRef } from 'react';
 import { View, Text, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, CameraType, CameraView} from 'expo-camera';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { StylesApp } from '@/app/styles';
+import {StylesApp} from '@/app/styles';
 
 interface IMobCamera {
     size?: { 
