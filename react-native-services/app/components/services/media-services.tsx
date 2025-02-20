@@ -1,19 +1,18 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { StylesApp } from '@/app/styles';
-import defaultImage from '@/assets/images/default.png';
+import profileImage from '@/assets/images/profile.png';
 
-const ImageService: FC = () => {
-
+const MediaService: FC = () => {
     return(
         <View style={styles.body}>
-            <Text style={styles.titeTxt}>IMAGE SERVICE</Text>
-            <Image source={defaultImage} alt='image' style={styles.image}/>
+            <Text style={styles.titeTxt}>MEDIA SERVICE</Text>
+            <Image source={profileImage} alt='image' style={styles.image}/>
             <View style={styles.bodyBtn}>
-                <MaterialCommunityIcons name='image-edit' style={[styles.btn, {color: '#40abf3'}]}/>
-                <MaterialCommunityIcons name='image-plus' style={[styles.btn, {color: '#3ca12e'}]}/>
-                <MaterialCommunityIcons name='image-remove' style={[styles.btn, {color: '#f38240'}]}/>
+                <MaterialCommunityIcons name='camera' style={[styles.btn, {color: '#40abf3'}]}/>
+                <MaterialCommunityIcons name='view-gallery' style={[styles.btn, {color: '#3ca12e'}]}/>
+                <MaterialCommunityIcons name='share' style={[styles.btn, {color: '#f38240'}]}/>
             </View>
         </View>
     );
@@ -53,8 +52,8 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        backgroundColor: 'grey',
+        // backgroundColor: 'grey',
     }
 })
 
-export default ImageService;
+export default MediaService;
