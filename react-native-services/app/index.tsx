@@ -1,13 +1,13 @@
 import { View, StyleSheet } from "react-native";
-import MobCamera from "./components/camera/mobcamera";
-import MobImagePicker from "./components/gallery/mobimagepicker";
+import ImageService from "./components/media/image-service";
 import { StylesApp } from "@/app/styles";
 
 export default function Index() {
   return (
     <View style={styles.body}>
-      <MobCamera/>
-      <MobImagePicker/>
+      <ImageService/>
+      {/* <MobCamera/> */}
+      {/* <MobImagePicker/> */}
     </View>
   );
 }
