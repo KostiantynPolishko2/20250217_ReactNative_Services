@@ -7,14 +7,14 @@ import saveImageToGallery from './service-utils';
 
 interface IImageService {
     _photoUri: string | undefined,
-    _handleIsImageService: ()=>void,
+    _resetPhotoUri: () => void,
 }
 
-const ImageService: FC<IImageService> = ({_photoUri, _handleIsImageService}) => {
+const ImageService: FC<IImageService> = ({_photoUri, _resetPhotoUri}) => {
 
     const handleSaveImage = async () => {
         if (await saveImageToGallery(_photoUri)){
-            _handleIsImageService();
+            _resetPhotoUri();
             alert('image was saved');
         }
         else{
@@ -29,7 +29,7 @@ const ImageService: FC<IImageService> = ({_photoUri, _handleIsImageService}) => 
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='image-edit' style={[ServiceStyles.btn, {color: '#40abf3'}]}/>
                 <MaterialCommunityIcons name='image-plus' style={[ServiceStyles.btn, {color: '#3ca12e'}]} onPress={handleSaveImage}/>
-                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]} onPress={_handleIsImageService}/>
+                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]} onPress={_resetPhotoUri}/>
             </View>
         </View>
     );

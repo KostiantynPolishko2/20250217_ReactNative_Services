@@ -15,12 +15,18 @@ const MediaService: FC = () => {
 
     const imageDefault = <Image source={profileImage} alt='image' style={ServiceStyles.image}/>;
 
-    const handleIsImageServie = () => {
-         setIsImageService(!isImageService);
+    // const handleIsImageServie = () => {
+    //     setIsImageService(!isImageService);
+    // }
+
+    const resetPhotUri = () => {
+        // handleIsImageServie();
+        setIsImageService(!isImageService);
+        setPhotoUri(undefined);
     }
 
     const imagePhoto = 
-        <TouchableOpacity onPress={handleIsImageServie}>
+        <TouchableOpacity onPress={()=>{setIsImageService(!isImageService);}}>
             <Image source={{uri: photoUri}} alt='image' style={ServiceStyles.image}/>
         </TouchableOpacity>;
 
@@ -43,7 +49,7 @@ const MediaService: FC = () => {
     }
 
     if(isImageService){
-        return <ImageService _photoUri={photoUri} _handleIsImageService={handleIsImageServie}/>
+        return <ImageService _photoUri={photoUri} _resetPhotoUri={resetPhotUri}/>
     }
 
     return(
