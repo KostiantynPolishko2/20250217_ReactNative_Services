@@ -1,22 +1,34 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import ServiceStyles from '@/app/components/services/service';
+import ServiceStyles from '@/app/components/services/service-styles';
 import defaultImage from '@/assets/images/default.png';
+import saveImageToGallery from './service-utils';
 
 interface IImageService {
+    _photoUri: string | undefined,
     _handleIsImageService: ()=>void,
 }
 
-const ImageService: FC<IImageService> = ({_handleIsImageService}) => {
+const ImageService: FC<IImageService> = ({_photoUri, _handleIsImageService}) => {
+
+    const handleSaveImage = async () => {
+        if (await saveImageToGallery(_photoUri)){
+            _handleIsImageService();
+            alert('image was saved');
+        }
+        else{
+            alert('image was not saved');
+        }
+    }
 
     return(
         <View style={ServiceStyles.body}>
             <Text style={ServiceStyles.titeTxt}>IMAGE SERVICE</Text>
-            <Image source={defaultImage} alt='image' style={ServiceStyles.image}/>
+            <Image source={_photoUri? {uri: _photoUri} : defaultImage} style={ServiceStyles.image}/>
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='image-edit' style={[ServiceStyles.btn, {color: '#40abf3'}]}/>
-                <MaterialCommunityIcons name='image-plus' style={[ServiceStyles.btn, {color: '#3ca12e'}]}/>
+                <MaterialCommunityIcons name='image-plus' style={[ServiceStyles.btn, {color: '#3ca12e'}]} onPress={handleSaveImage}/>
                 <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]} onPress={_handleIsImageService}/>
             </View>
         </View>

@@ -39,10 +39,9 @@ const MobImagePicker:FC = () => {
         return;
       }
       await MediaLibrary.saveToLibraryAsync(imageUri);
-      // console.log('image saved to users\' gallery');
     }
     else{
-      // console.log('permission is danied for saving to gallery');
+      console.log('permission is danied for saving to gallery');
     }
   }
 
@@ -50,7 +49,7 @@ const MobImagePicker:FC = () => {
     <View style={styles.container}>
       <View style={StylesApp.flex_row}>
         <Button title="image gallery" onPress={pickImageGallery} />
-        {/* <Button title="image camera" onPress={pickImageCamera} /> */}
+        <Button title="image camera" onPress={pickImageCamera} />
         <Button title="save" onPress={()=>{saveImageToGallery(image)}} />
         <Button title="reset" onPress={()=>{console.log('call reset image')}} />
       </View>

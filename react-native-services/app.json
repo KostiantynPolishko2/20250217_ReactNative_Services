@@ -39,6 +39,14 @@
           "cameraPermission": "This app needs camera access to take photos.",
           "microphonePermission": "This app needs microphone access to record audio."
         }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow your camera to access your photos.",
+          "savePhotosPermission": "Allow your device to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
       ]
     ],
     "experiments": {
