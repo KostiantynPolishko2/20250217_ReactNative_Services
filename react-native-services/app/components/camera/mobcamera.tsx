@@ -1,6 +1,6 @@
 import React, { FC, useState, useRef } from 'react';
 import { View, Text, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Camera, CameraType, CameraView} from 'expo-camera';
+import { CameraType, CameraView} from 'expo-camera';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {StylesApp} from '@/app/styles';
 
@@ -10,41 +10,23 @@ interface IMobCamera {
         _height: number,
     },
     _cameraType?: CameraType,
+    _handleCameraPermission: (flag: boolean)=>void,
+    _handleSetPhotoUri: (photoUri: string | undefined)=>void,
 }
 
-const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 200}, _cameraType='front'}) => {
+const MobCamera: FC<IMobCamera> = ({_handleCameraPermission, _handleSetPhotoUri,
+    size={_width: 250, _height: 200}, _cameraType='front'}) => {
 
-    const [photoUri, setPhotoUri] = useState<string | null>(null);
-    const [permission, setPermission] = useState<Boolean>(false)
     const [cameraType, setCameraType] = useState<CameraType>(_cameraType);
     const cameraRef = useRef<CameraView | null>(null);
 
-    const openPermission = async() => {
-        const { status } = await Camera.requestCameraPermissionsAsync();
-        setPermission(status === 'granted');
-    }
-
     const captureImage = async () => {
         if (cameraRef.current) {
-          const photo = await cameraRef.current.takePictureAsync();
-          setPhotoUri(photo?.uri? photo.uri: photoUri);
+            const photo = await cameraRef.current.takePictureAsync();
+            _handleSetPhotoUri(photo?.uri);
         }
     };
-
-    // activate permission for camera
-    if (!permission) {
-        return (
-            <View>
-                <Button 
-                    title="camera"
-                    color='#4e585f'
-                    onPress={openPermission}
-                />
-            </View>
-        );
-    }
  
-    // final presence activated camera
     return (
         <View>
             <View style={styles.titleTxt}>
@@ -67,11 +49,8 @@ const MobCamera: FC<IMobCamera> = ({size={_width: 250, _height: 200}, _cameraTyp
                 <Button
                     title='close'
                     color='#d6423d'
-                    onPress={()=>{setPermission(false)}}
+                    onPress={()=>{_handleCameraPermission(false)}}
                 />
-            </View>
-            <View style={[StylesApp.flex_row, {justifyContent: 'center'}]}>
-                {photoUri && <Image source={{uri: photoUri}} style={styles.previewPhoto}/>}
             </View>
         </View>
     );
