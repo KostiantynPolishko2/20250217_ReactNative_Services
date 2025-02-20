@@ -1,29 +1,77 @@
 import React, { FC, useState } from 'react';
 import { Button, Image, View, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
+import { StylesApp } from '@/app/styles';
 
 const MobImagePicker:FC = () => {
-  const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | undefined>(undefined);
 
-  const pickImage = async () => {
+  const pickImageGallery = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images', 'videos'],
-      allowsEditing: false,
+      allowsEditing: true,
       aspect: [3, 3],
       quality: 1,
     });
 
-    // console.log('picker result', result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      // const originalUri = result.assets[0].uri;
+      // const newPath = FileSystem.documentDirectory + `edited_${Date.now()}.jpg`; // Unique filename
+      // try {
+      //   await FileSystem.copyAsync({
+      //     from: originalUri,
+      //     to: newPath,
+      //   });
+      //   setImage(newPath); // Set new image URI
+      //   console.log('\nImage saved from:', originalUri);
+      //   console.log('\nImage saved to:', newPath);
+      // } catch (error) {
+      //   console.error('Error saving image:', error);
+      // }
     }
   };
 
+  const pickImageCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      cameraType: ImagePicker.CameraType.front,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled){
+      setImage(result.assets[0].uri);
+      console.log('picked image uri', image);
+    }
+  }
+
+  const saveImageToGallery = async (imageUri: string | undefined) => {
+    const { status } = await MediaLibrary.requestPermissionsAsync();
+
+    if (status === 'granted'){
+      if(imageUri === undefined){
+        return;
+      }
+      await MediaLibrary.saveToLibraryAsync(imageUri);
+      console.log('image saved to users\' gallery');
+    }
+    else{
+      console.log('permission is danied for saving to gallery');
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {/* <Button title="pick an image from gallery" onPress={pickImageGallery} /> */}
+      <View style={StylesApp.flex_row}>
+        <Button title="image camera" onPress={pickImageCamera} />
+        <Button title="save" onPress={()=>{saveImageToGallery(image)}} />
+        <Button title="reset" onPress={()=>{console.log('call reset image')}} />
+      </View>
       {image && <Image source={{ uri: image }} style={styles.image} />}
     </View>
   );
