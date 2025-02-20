@@ -4,7 +4,11 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ServiceStyles from '@/app/components/services/service';
 import defaultImage from '@/assets/images/default.png';
 
-const ImageService: FC = () => {
+interface IImageService {
+    _handleIsImageService: ()=>void,
+}
+
+const ImageService: FC<IImageService> = ({_handleIsImageService}) => {
 
     return(
         <View style={ServiceStyles.body}>
@@ -13,7 +17,7 @@ const ImageService: FC = () => {
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='image-edit' style={[ServiceStyles.btn, {color: '#40abf3'}]}/>
                 <MaterialCommunityIcons name='image-plus' style={[ServiceStyles.btn, {color: '#3ca12e'}]}/>
-                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]}/>
+                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]} onPress={_handleIsImageService}/>
             </View>
         </View>
     );

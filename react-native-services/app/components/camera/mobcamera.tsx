@@ -1,5 +1,5 @@
 import React, { FC, useState, useRef } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import { CameraType, CameraView} from 'expo-camera';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {StylesApp} from '@/app/styles';

@@ -1,18 +1,28 @@
 import React, { FC, useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Camera } from 'expo-camera';
 import ServiceStyles from '@/app/components/services/service';
 import profileImage from '@/assets/images/profile.png';
 import MobCamera from '../camera/mobcamera';
+import ImageService from './image-service';
 
 const MediaService: FC = () => {
 
-    const [cameraPermission, setCameraPermission] = useState<Boolean>(false)
+    const [cameraPermission, setCameraPermission] = useState<boolean>(false)
+    const [isImageService, setIsImageService] = useState<boolean>(false);
     const [photoUri, setPhotoUri] = useState<string | undefined>(undefined);
 
     const imageDefault = <Image source={profileImage} alt='image' style={ServiceStyles.image}/>;
-    const imagePhoto = <Image source={{uri: photoUri}} alt='image' style={ServiceStyles.image}/>
+
+    const handleIsImageServie = () => {
+         setIsImageService(!isImageService);
+    }
+
+    const imagePhoto = 
+        <TouchableOpacity onPress={handleIsImageServie}>
+            <Image source={{uri: photoUri}} alt='image' style={ServiceStyles.image}/>
+        </TouchableOpacity>;
 
     const getCameraPermission = async() => {
         const { status } = await Camera.requestCameraPermissionsAsync();
@@ -30,6 +40,10 @@ const MediaService: FC = () => {
 
     if(cameraPermission){
         return <MobCamera _handleCameraPermission={handleCameraPermission} _handleSetPhotoUri={handleSetPhotoUri}/>
+    }
+
+    if(isImageService){
+        return <ImageService _handleIsImageService={handleIsImageServie}/>
     }
 
     return(
