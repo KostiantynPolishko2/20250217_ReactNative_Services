@@ -1,11 +1,11 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { StylesApp } from "./styles";
-import LoadContacts from "./components/contacts/load-contacts";
+import PhoneContacts from "./components/contacts/phone-contacts";
 
 export default function Index() {
   return (
     <View style={styles.body}>
-      <LoadContacts/>
+      <PhoneContacts/>
     </View>
   );
 }

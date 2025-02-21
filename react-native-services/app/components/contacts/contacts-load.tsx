@@ -1,15 +1,19 @@
 import React, { FC, useState, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import * as Contacts from "expo-contacts";
 import { LoadStyles } from "./contacts-styles";
 
-const LoadContacts:FC = () => {
+interface IContactsLoad {
+    _isLoaded: boolean,
+    _setIsLoaded: (flag: boolean)=>void,
+}
+
+const ContactsLoad:FC<IContactsLoad> = ({_isLoaded, _setIsLoaded}) => {
 
     const [permission, setPermission] = useState<boolean>(false);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-    let loadStyle = isLoaded? LoadStyles.loaded: LoadStyles.unloaded;
+    let loadStyle = _isLoaded? LoadStyles.loaded: LoadStyles.unloaded;
 
     useEffect(()=>{
         ( async () => { 
@@ -19,11 +23,11 @@ const LoadContacts:FC = () => {
     }, [permission]);
 
     return(
-        <TouchableOpacity onPress={()=>{setIsLoaded(!isLoaded)}} style={[LoadStyles.body, loadStyle]} disabled={!permission}>
+        <TouchableOpacity onPress={()=>{_setIsLoaded(!_isLoaded)}} style={[LoadStyles.body, loadStyle]} disabled={!permission}>
             <MaterialCommunityIcons name="card-account-phone" style={LoadStyles.btn}/>
             <Text style={LoadStyles.bthTxt}>CONTACTS{permission || ' LOCKED!'}</Text>
         </TouchableOpacity>
     );
 };
 
-export default LoadContacts;
+export default ContactsLoad;

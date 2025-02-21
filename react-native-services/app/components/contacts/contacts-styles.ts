@@ -8,16 +8,14 @@ export const LoadStyles = StyleSheet.create({
         backgroundColor: '#6a7074',
     },
     loaded: {
-        width: '100%',
         borderRadius: 0,
     },
     unloaded: {
-        width: 'auto',
         borderRadius: 5,
     },
     btn: {
         fontSize: 35,   
-        color: '#289e56',
+        color: '#26d13f',
         backgroundColor: '#3b3737',
         paddingLeft: 5,
         paddingRight: 5,
@@ -30,4 +28,13 @@ export const LoadStyles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 20,
     }
-})
+});
+
+export const ListStyles = StyleSheet.create({
+    body: {
+        ...StylesApp.flex_row,
+        flexDirection: 'column',
+        backgroundColor: '#c1c7c2',
+        padding: 5,
+    }
+});
