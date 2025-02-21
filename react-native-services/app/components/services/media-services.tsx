@@ -6,6 +6,8 @@ import ServiceStyles from '@/app/components/services/service-styles';
 import profileImage from '@/assets/images/profile.png';
 import MobCamera from '../camera/mobcamera';
 import ImageService from './image-service';
+import { pickImageFromGallery } from './service-utils';
+import { getMediaLibraryPermissionsAsync as imagePickerGetMediaLibPermissionAsync} from 'expo-image-picker';
 
 const MediaService: FC = () => {
 
@@ -15,12 +17,7 @@ const MediaService: FC = () => {
 
     const imageDefault = <Image source={profileImage} alt='image' style={ServiceStyles.image}/>;
 
-    // const handleIsImageServie = () => {
-    //     setIsImageService(!isImageService);
-    // }
-
     const resetPhotUri = () => {
-        // handleIsImageServie();
         setIsImageService(!isImageService);
         setPhotoUri(undefined);
     }
@@ -44,6 +41,17 @@ const MediaService: FC = () => {
         setCameraPermission(false);
     }
 
+    const handleImageFromGallery = async() => {
+        const { status } = await imagePickerGetMediaLibPermissionAsync(false);
+        if (status !== 'granted'){
+            setPhotoUri(photoUri);
+            alert('danied access to gallery');
+        }
+        else{
+            setPhotoUri(await pickImageFromGallery() || photoUri);
+        }
+    }
+
     if(cameraPermission){
         return <MobCamera _handleCameraPermission={handleCameraPermission} _handleSetPhotoUri={handleSetPhotoUri}/>
     }
@@ -58,7 +66,7 @@ const MediaService: FC = () => {
             {photoUri? imagePhoto : imageDefault}
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='video-image' style={[ServiceStyles.btn, {color: '#40abf3'}]} onPress={getCameraPermission} />
-                <MaterialCommunityIcons name='view-gallery' style={[ServiceStyles.btn, {color: '#3ca12e'}]}/>
+                <MaterialCommunityIcons name='view-gallery' style={[ServiceStyles.btn, {color: '#3ca12e'}]} onPress={handleImageFromGallery}/>
                 <MaterialCommunityIcons name='share' style={[ServiceStyles.btn, {color: '#f38240'}]}/>
             </View>
         </View>

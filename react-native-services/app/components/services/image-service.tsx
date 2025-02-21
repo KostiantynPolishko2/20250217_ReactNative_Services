@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { View, Text, Image } from 'react-native';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ServiceStyles from '@/app/components/services/service-styles';
 import defaultImage from '@/assets/images/default.png';
-import saveImageToGallery from './service-utils';
+import {saveImageToGallery} from './service-utils';
+import { requestPermissionsAsync as galleryPermission } from 'expo-media-library';
 
 interface IImageService {
     _photoUri: string | undefined,
@@ -13,7 +14,12 @@ interface IImageService {
 const ImageService: FC<IImageService> = ({_photoUri, _resetPhotoUri}) => {
 
     const handleSaveImage = async () => {
-        if (await saveImageToGallery(_photoUri)){
+        const { status } = await galleryPermission();
+        if (status !== 'granted'){
+            _resetPhotoUri();
+            alert('danied access to gallery');
+        }
+        else if (await saveImageToGallery(_photoUri)){
             _resetPhotoUri();
             alert('image was saved');
         }
