@@ -57,7 +57,7 @@ const MediaService: FC = () => {
     }
 
     if(isImageService){
-        return <ImageService _photoUri={photoUri} _resetPhotoUri={resetPhotUri}/>
+        return <ImageService _photoUri={photoUri} _resetPhotoUri={resetPhotUri} closeImageService={setIsImageService}/>
     }
 
     return(
@@ -67,7 +67,7 @@ const MediaService: FC = () => {
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='video-image' style={[ServiceStyles.btn, {color: '#40abf3'}]} onPress={getCameraPermission} />
                 <MaterialCommunityIcons name='view-gallery' style={[ServiceStyles.btn, {color: '#3ca12e'}]} onPress={handleImageFromGallery}/>
-                <MaterialCommunityIcons name='share' style={[ServiceStyles.btn, {color: '#f38240'}]}/>
+                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#d61717'}]} onPress={()=>{setPhotoUri(undefined);}}/>
             </View>
         </View>
     );

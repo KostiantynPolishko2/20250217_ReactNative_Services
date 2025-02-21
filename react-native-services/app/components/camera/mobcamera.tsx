@@ -30,7 +30,7 @@ const MobCamera: FC<IMobCamera> = ({_handleCameraPermission, _handleSetPhotoUri,
     return (
         <View>
             <View style={styles.titleTxt}>
-                <Text style={styles.rowTxt}>expo-camera</Text>
+                <Text style={styles.rowTxt}>EXPO-CAMERA</Text>
             </View>
             <CameraView 
                 ref={cameraRef}

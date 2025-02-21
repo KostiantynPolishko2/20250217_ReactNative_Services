@@ -9,9 +9,10 @@ import { requestPermissionsAsync as galleryPermission } from 'expo-media-library
 interface IImageService {
     _photoUri: string | undefined,
     _resetPhotoUri: () => void,
+    closeImageService: (flag: boolean)=>void,
 }
 
-const ImageService: FC<IImageService> = ({_photoUri, _resetPhotoUri}) => {
+const ImageService: FC<IImageService> = ({_photoUri, _resetPhotoUri, closeImageService}) => {
 
     const handleSaveImage = async () => {
         const { status } = await galleryPermission();
@@ -35,7 +36,7 @@ const ImageService: FC<IImageService> = ({_photoUri, _resetPhotoUri}) => {
             <View style={ServiceStyles.bodyBtn}>
                 <MaterialCommunityIcons name='image-edit' style={[ServiceStyles.btn, {color: '#40abf3'}]}/>
                 <MaterialCommunityIcons name='image-plus' style={[ServiceStyles.btn, {color: '#3ca12e'}]} onPress={handleSaveImage}/>
-                <MaterialCommunityIcons name='image-remove' style={[ServiceStyles.btn, {color: '#f38240'}]} onPress={_resetPhotoUri}/>
+                <MaterialCommunityIcons name='close-box' style={[ServiceStyles.btn, {color: '#d61717'}]} onPress={()=>{closeImageService(false);}}/>
             </View>
         </View>
     );
