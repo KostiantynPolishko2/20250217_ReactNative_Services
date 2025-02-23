@@ -19,36 +19,36 @@ export const SimpleData = [
       },
 ];
 
-export type Contact = {firstName: string, secondName: string, phoneNumber: string};
+export type Contact = {firstName: string, secondName: string, phoneNumber: string, img: string | undefined};
 // type Section = {title: string, data: Contact[]}
 
 export const SimpleContacts: SectionListData<Contact>[] = [
   { title: 'a', 
     data: [
-      { firstName: 'aaabbbccc', secondName: 'wwwyyyzzz', phoneNumber: '+01234567' },
-      { firstName: 'aabbbbccc', secondName: 'wwyyyyzzz', phoneNumber: '+02134567' },
-      { firstName: 'aacbbbccc', secondName: 'wwzyyyzzz', phoneNumber: '+03214567' }
+      { firstName: 'aaabbb', secondName: 'wwwyyy', phoneNumber: '+01234567', img: undefined},
+      { firstName: 'aabbbb', secondName: 'wwyyyy', phoneNumber: '+02134567', img: undefined },
+      { firstName: 'aacbbb', secondName: 'wwzyyy', phoneNumber: '+03214567', img: undefined }
     ]
   },
   { title: 'e', 
     data: [
-      { firstName: 'eeebbbccc', secondName: 'vvvyyyzzz', phoneNumber: '+01234567' },
-      { firstName: 'eebbbbccc', secondName: 'vvyyyyzzz', phoneNumber: '+02134567' },
-      { firstName: 'eecbbbccc', secondName: 'vvzyyyzzz', phoneNumber: '+03214567' }
+      { firstName: 'eeebbb', secondName: 'vvvyyy', phoneNumber: '+08234567', img: undefined },
+      { firstName: 'eebbbb', secondName: 'vvyyyy', phoneNumber: '+08134567', img: undefined },
+      { firstName: 'eecbbb', secondName: 'vvzyyy', phoneNumber: '+08214567', img: undefined }
     ]
   },
   { title: 'j', 
     data: [
-      { firstName: 'jjjbbbccc', secondName: 'tttyyyzzz', phoneNumber: '+01234567' },
-      { firstName: 'jjbbbbccc', secondName: 'ttyyyyzzz', phoneNumber: '+02134567' },
-      { firstName: 'jjcbbbccc', secondName: 'ttzyyyzzz', phoneNumber: '+03214567' }
+      { firstName: 'jjjbbb', secondName: 'tttyyy', phoneNumber: '+09234567', img: undefined },
+      { firstName: 'jjbbbb', secondName: 'ttyyyy', phoneNumber: '+09134567', img: undefined},
+      { firstName: 'jjcbbb', secondName: 'ttzyyy', phoneNumber: '+09214567', img: undefined }
     ]
   },
   { title: 'o', 
     data: [
-      { firstName: 'ooobbbccc', secondName: 'oooyyyzzz', phoneNumber: '+01234567' },
-      { firstName: 'oobbbbccc', secondName: 'ooyyyyzzz', phoneNumber: '+02134567' },
-      { firstName: 'oocbbbccc', secondName: 'oozyyyzzz', phoneNumber: '+03214567' }
+      { firstName: 'ooobbb', secondName: 'oooyyy', phoneNumber: '+01234569', img: undefined },
+      { firstName: 'oobbbb', secondName: 'ooyyyy', phoneNumber: '+02134569', img: undefined },
+      { firstName: 'oocbbb', secondName: 'oozyyy', phoneNumber: '+03214569', img: undefined }
     ]
   }
 ];

@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <View style={styles.body}>
       {/* <PhoneContacts/> */}
-      <SimpleSectionList/>
+      <SimpleSectionList isHeader={true}/>
     </View>
   );
 }
