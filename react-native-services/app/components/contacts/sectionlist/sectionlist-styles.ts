@@ -1,11 +1,11 @@
 import { StyleSheet, StatusBar } from "react-native";
 import { StylesApp } from "@/app/styles";
 
-export const TestSectionStyles = StyleSheet.create({
+export const SectionListStyles = StyleSheet.create({
     container: {
         flex: 0,
         paddingTop: StatusBar.currentHeight,
-        marginHorizontal: 16,
+        marginHorizontal: 0,
         height: '90%',
         minWidth: '75%',
     },

@@ -1,16 +1,16 @@
 import React, { FC, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import ContactsLoad from "./contacts-load";
-import ContactsList from "./contacts-list";
+import SectionListContacts from "./sectionlist/sectionlist-contacts";
 
 const PhoneContacts: FC = () => {
     
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     return (
-        <View style={{width: isLoaded? '100%' : 'auto'}}>
+        <View>
             <ContactsLoad _isLoaded={isLoaded} _setIsLoaded={setIsLoaded}/>
-            {isLoaded && <ContactsList/>}
+            {isLoaded && <SectionListContacts isHeader={false}/>}
         </View>
     );
 };

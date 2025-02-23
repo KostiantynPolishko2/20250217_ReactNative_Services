@@ -1,28 +1,11 @@
 import { SectionListData } from "react-native";
 
-export const SimpleData = [
-    {
-        name: 'Main dishes',
-        data: ['Pizza', 'Burger', 'Risotto'],
-      },
-      {
-        name: 'Sides',
-        data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
-      },
-      {
-        name: 'Drinks',
-        data: ['Water', 'Coke', 'Beer'],
-      },
-      {
-        name: 'Desserts',
-        data: ['Cheese Cake', 'Ice Cream'],
-      },
-];
-
 export type Contact = {firstName: string, secondName: string, phoneNumber: string, img: string | undefined};
-// type Section = {title: string, data: Contact[]}
+export type SectionContacts = {title: string, data: Contact[]}
 
-export const SimpleContacts: SectionListData<Contact>[] = [
+// export const SimpleContacts0: SectionListData<Contact>[] | undefined = undefined;
+
+export const SimpleContacts: SectionContacts[] = [
   { title: 'a', 
     data: [
       { firstName: 'aaabbb', secondName: 'wwwyyy', phoneNumber: '+01234567', img: undefined},

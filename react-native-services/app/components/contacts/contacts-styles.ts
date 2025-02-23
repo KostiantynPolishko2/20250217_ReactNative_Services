@@ -9,6 +9,7 @@ export const LoadStyles = StyleSheet.create({
     },
     loaded: {
         borderRadius: 0,
+        width: 'auto',
     },
     unloaded: {
         borderRadius: 5,

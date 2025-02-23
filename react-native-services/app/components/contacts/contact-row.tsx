@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import FeatherIcon from '@expo/vector-icons/Feather';
 import { ContactsRowStyles as styles } from "./contacts-styles";
-import { Contact } from "@/app/components/test/test-data";
+import { Contact } from "@/app/components/contacts/sectionlist/sectionlist-data";
 
 interface IContactRow {
     contact: Contact,
