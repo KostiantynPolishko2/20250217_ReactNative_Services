@@ -5,17 +5,18 @@ import * as Contacts from "expo-contacts";
 
 const ContactsList: FC = () => {
 
-    const [contacts, setContacts] = useState<Contacts.Contact[] | undefined>(undefined)
+    const [contacts, setContacts] = useState<Contacts.Contact[] | undefined>(undefined);
 
     useEffect(()=>{
         (async () => {
             const { data } = await Contacts.getContactsAsync({fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Emails, Contacts.Fields.Image]});
             setContacts(data);
-            // console.log('contacts', contacts && contacts[0]);
+            console.log('contacts', contacts && contacts[0]);
         })
         ();
     }, []);
 
+    // rendering of contact list
     return(
         <View style={ListStyles.body}>
             <ScrollView>
