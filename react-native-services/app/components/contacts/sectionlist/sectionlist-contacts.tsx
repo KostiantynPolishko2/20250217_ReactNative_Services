@@ -13,28 +13,35 @@ interface ISectionListContacts {
 
 const SectionListContacts:FC<ISectionListContacts>  = ({isHeader}) => {
 
-    const [contacts, setContactsTest] = useState<SectionContacts[] | undefined>(undefined);
+    const [data, setData] = useState<Contacts.Contact[] | undefined>(undefined);
+    // const [contacts, setContactsTest] = useState<SectionContacts[] | undefined>(undefined);
 
     useEffect(()=>{
         (async () => {
             const { data } = await Contacts.getContactsAsync();
-
-            const transformedSections: SectionContacts[] = _.chain(data)
-                .map((contact) => ({
-                    firstName: contact.firstName || "",
-                    secondName: contact.lastName || "",
-                    phoneNumber: contact.phoneNumbers?.[0]?.number || "No number",
-                    img: contact.imageAvailable ? contact.image?.uri : undefined,
-                }))
-                .groupBy((contact) => contact.firstName.charAt(0).toUpperCase()) // Group by first letter of firstName
-                .map((contacts, letter) => ({ title: letter, data: contacts }))
-                .orderBy(["title"], ["asc"]) // Sort alphabetically
-                .value();
-            
-            setContactsTest(transformedSections);
+            setData(data);
         })
         ();
     }, []);
+
+    const contacts:SectionContacts[] | undefined = useMemo(()=>{
+        if(!data) return undefined;
+
+        const transformeData: SectionContacts[] = _.chain(data)
+            .map((contact) => ({
+                firstName: contact.firstName || "",
+                secondName: contact.lastName || "",
+                phoneNumber: contact.phoneNumbers?.[0]?.number || "No number",
+                img: contact.imageAvailable ? contact.image?.uri : undefined,
+            }))
+            .groupBy((contact) => contact.firstName.charAt(0).toUpperCase()) // Group by first letter of firstName
+            .map((contacts, letter) => ({ title: letter, data: contacts }))
+            .orderBy(["title"], ["asc"]) // Sort alphabetically
+            .value();
+
+        return transformeData;
+
+    }, [data]);
 
     return(
         <SafeAreaProvider>
