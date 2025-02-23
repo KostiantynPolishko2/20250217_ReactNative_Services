@@ -1,10 +1,11 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useMemo } from "react";
 import { Text, SectionList} from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import * as Contacts from "expo-contacts";
 import { SectionListStyles as styles } from "./sectionlist-styles";
-import { SimpleContacts, SectionContacts } from "./sectionlist-data";
+import { SectionContacts } from "./sectionlist-data";
 import ContactRow from "@/app/components/contacts/contact-row";
+import _ from 'lodash';
 
 interface ISectionListContacts {
     isHeader: boolean,
@@ -12,14 +13,25 @@ interface ISectionListContacts {
 
 const SectionListContacts:FC<ISectionListContacts>  = ({isHeader}) => {
 
-    // const [contacts, setContacts] = useState<SectionContacts | undefined>(undefined);
-    const [contacts, setContacts] = useState<SectionContacts[] | undefined>(undefined);
+    const [contacts, setContactsTest] = useState<SectionContacts[] | undefined>(undefined);
 
     useEffect(()=>{
         (async () => {
-            const { data } = await Contacts.getContactsAsync({fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Emails, Contacts.Fields.Image]});
-            setContacts(SimpleContacts);
-            // console.log('contacts', contacts && contacts[0]);
+            const { data } = await Contacts.getContactsAsync();
+
+            const transformedSections: SectionContacts[] = _.chain(data)
+                .map((contact) => ({
+                    firstName: contact.firstName || "",
+                    secondName: contact.lastName || "",
+                    phoneNumber: contact.phoneNumbers?.[0]?.number || "No number",
+                    img: contact.imageAvailable ? contact.image?.uri : undefined,
+                }))
+                .groupBy((contact) => contact.firstName.charAt(0).toUpperCase()) // Group by first letter of firstName
+                .map((contacts, letter) => ({ title: letter, data: contacts }))
+                .orderBy(["title"], ["asc"]) // Sort alphabetically
+                .value();
+            
+            setContactsTest(transformedSections);
         })
         ();
     }, []);
@@ -29,7 +41,7 @@ const SectionListContacts:FC<ISectionListContacts>  = ({isHeader}) => {
             <SafeAreaView style={[styles.container]} edges={['top']}>
                 <SectionList
                     stickySectionHeadersEnabled={true}
-                    sections={contacts? contacts : []}
+                    sections={contacts || []}
                     keyExtractor={(item, index) => item.phoneNumber + index}
                     renderSectionHeader={({section: {title}}) => (
                         isHeader? <Text style={styles.header}>{title}</Text> : <></>

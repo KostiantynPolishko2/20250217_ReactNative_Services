@@ -7,7 +7,7 @@ export const SectionListStyles = StyleSheet.create({
         paddingTop: StatusBar.currentHeight,
         marginHorizontal: 0,
         height: '90%',
-        minWidth: '75%',
+        // minWidth: '75%',
     },
     header: {
         fontSize: 26,

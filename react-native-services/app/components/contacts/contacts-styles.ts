@@ -56,6 +56,7 @@ export const ContactsRowStyles = StyleSheet.create({
         width: 42,
         height: 42,
         borderRadius: 12,
+        marginLeft: 5,
     },
     cardAvatar: {
         display: 'flex',
