@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
 export const CenterPosition = styled.View`
     display: flex;
@@ -25,3 +26,47 @@ export const BatteryBarWrapper = styled(CenterPosition)`
     height: 30px;
     border: 1px solid gray;
 `;
+
+export const BatteryStatsStyles = StyleSheet.create({
+    container: {
+        borderWidth: 1,
+        borderColor: '#c2b5b4',
+        borderRadius: 5,
+        backgroundColor: '#bdf0ad',
+        minWidth: 'auto',
+        position: 'absolute',
+        top: 10,
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: '700',
+      color: '#1d1d1d',
+      marginBottom: 0,
+    },
+    /** Stats */
+    stats: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 5,
+    },
+    statsItem: {
+        // flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderLeftWidth: 1,
+        borderColor: '#c2b5b4',
+        width: '30%',
+    },
+    statsItemLabel: {
+      fontSize: 15,
+      fontWeight: '500',
+      color: '#000',
+      marginBottom: 4,
+    },
+    statsItemValue: {
+      fontSize: 17,
+      fontWeight: '700',
+      color: '#000',
+    },
+});
