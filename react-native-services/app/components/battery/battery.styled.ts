@@ -20,11 +20,16 @@ export const RectangleBox = styled.View<IRectangleBox>`
     background-color: gray;
 `;
 
-export const BatteryBarWrapper = styled(CenterPosition)`
-    background-color:rgb(160, 192, 223);
+interface IBattery{
+    isAvailable: boolean,
+}
+
+export const BatteryBarWrapper = styled(CenterPosition)<IBattery>`
+    background-color: rgb(241, 172, 42);
     width: 100px;
     height: 30px;
     border: 1px solid gray;
+    border-radius: 3px;
 `;
 
 export const BatteryStatsStyles = StyleSheet.create({
@@ -70,3 +75,14 @@ export const BatteryStatsStyles = StyleSheet.create({
       color: '#000',
     },
 });
+
+export const ChargeLevelStyle = StyleSheet.create({
+    body: {
+        backgroundColor: '#45e64a',
+        height: 28,
+        position: 'absolute',
+        right: 0,
+        borderTopRightRadius: 3,
+        borderBottomRightRadius: 3,
+    }
+})
