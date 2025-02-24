@@ -1,15 +1,33 @@
-import React, { FC } from "react";
-import { View, Text } from "react-native";
+import React, { FC, useState, useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import * as Battery from 'expo-battery';
 import { BatteryBarWrapper, CenterPosition, RectangleBox } from "./battery.styled";
 
-const BatteryBar: FC = () => {
+interface IBatteryBar {
+    handleIsStats: ()=>void,
+}
+
+const BatteryBar: FC<IBatteryBar> = ({handleIsStats}) => {
+
+    const [isAvailable, setIsAvailable] = useState<boolean>(false);
+
+    useEffect(()=>{
+        (async () => {
+            setIsAvailable(await Battery.isAvailableAsync());
+            // console.log('is avalable', isAvailable);
+        })
+        ();
+    }, []);
+
     return (
-        <CenterPosition>
-            <RectangleBox/>
-            <BatteryBarWrapper>
-                <Text>battery</Text>
-            </BatteryBarWrapper>
-        </CenterPosition>
+        <TouchableOpacity onPress={handleIsStats} disabled={!isAvailable}>
+            <CenterPosition>
+                <RectangleBox/>
+                <BatteryBarWrapper>
+                    <Text>battery</Text>
+                </BatteryBarWrapper>
+            </CenterPosition>
+        </TouchableOpacity>
     );
 };
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { BatteryStatsStyles as styles } from './battery.styled';
 
 interface IBatteryStats {
