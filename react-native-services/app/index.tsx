@@ -1,16 +1,18 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import { StylesApp } from "./styles";
+import BatteryBar from "./components/battery/battery-bar";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: '#c9d6cd',
-      }}
-    >
-      <Text>start page</Text>
+    <View style={styles.body}>
+      <BatteryBar/>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  body: {
+    ...StylesApp.flex1_center,
+    backgroundColor: '#c9d6cd',
+  }
+});
