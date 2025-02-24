@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, ImageBackground } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import * as Battery from 'expo-battery';
 import { BatteryBarWrapper, CenterPosition, RectangleBox } from "./battery.styled";
 import { ChargeLevelStyle } from "./battery.styled";
