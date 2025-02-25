@@ -36,6 +36,7 @@ const ProgressBar:FC = () => {
     const stopFullInOut = () => {
         setIsAnimated(false);
         animationRef.current?.stop();
+        // animationRef.current?.reset();
         progress.setValue(0);
     }
 
