@@ -3,6 +3,7 @@ import BatteryBar from "./battery-bar";
 import BatteryStats from "./battery-stats";
 import { getPowerStateAsync } from "expo-battery";
 import { IStats } from "./battery-stats";
+import ProgressBar from "./ProgressBar";
 
 
 const Battery: FC = () => {
@@ -30,6 +31,7 @@ const Battery: FC = () => {
         <>
             {isStats && <BatteryStats batteryState={batteryState}/>}
             <BatteryBar handleIsStats={handleIsStats}/>
+            <ProgressBar/>
         </>
     );
 }
