@@ -3,19 +3,13 @@ import { View, Text, TouchableOpacity, Vibration } from "react-native";
 import * as Battery from 'expo-battery';
 import { BatteryBarWrapper, CenterPosition, RectangleBox } from "./battery.styled";
 import { ChargeLevelStyle } from "./battery.styled";
+import { VIBRO_PATTERN } from "@/app/constants/constants";
 
 interface IBatteryBar {
     handleIsStats: ()=>void,
 }
 
 const BatteryBar: FC<IBatteryBar> = ({handleIsStats}) => {
-
-    const ONE_SECONDS_IN_MS = 1000;
-    const VIBRO_PATTERN = [
-        1 * ONE_SECONDS_IN_MS,
-        2 * ONE_SECONDS_IN_MS,
-        1 * ONE_SECONDS_IN_MS,
-    ]
 
     const [isAvailable, setIsAvailable] = useState<boolean>(false);
     const [_batteryLevel, setBatteryLevel] = useState<number>(0);
@@ -47,8 +41,14 @@ const BatteryBar: FC<IBatteryBar> = ({handleIsStats}) => {
         }
     }, [isVibro]);
 
+    const handleBatteryBar = async() => {
+        setBatteryLevel(Math.round(await Battery.getBatteryLevelAsync()*100));
+        setIsVibro(!isVibro);
+        handleIsStats();
+    }
+
     return (
-        <TouchableOpacity onPress={()=>{handleIsStats(); setIsVibro(!isVibro);}} disabled={!isAvailable}>
+        <TouchableOpacity onPress={handleBatteryBar} disabled={!isAvailable}>
             <CenterPosition>
                 <RectangleBox/>
                 <BatteryBarWrapper>
