@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect, useRef } from "react";
-import { View, Text, TouchableOpacity, Button } from "react-native";
+import React, { FC, useState, useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import * as Battery from 'expo-battery';
 import { BatteryBarWrapper, CenterPosition, RectangleBox } from "./battery.styled";
 import { ChargeLevelStyle } from "./battery.styled";
@@ -27,11 +27,11 @@ const BatteryBar: FC<IBatteryBar> = ({handleIsStats}) => {
     useEffect(() => {
         const subscription = Battery.addBatteryLevelListener(({ batteryLevel }) => {
             console.log(`Battery Level: ${batteryLevel * 100}%`);
-            setBatteryLevel(Math.round(batteryLevel) * 100);
+            // setBatteryLevel(Math.round(batteryLevel) * 100);
         });
 
         return () => subscription.remove(); // Clean up listener when unmounted
-    }, [isAvailable]);
+    }, []);
 
 
     return (
