@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import { View, StyleSheet, Animated, Button } from 'react-native';
 
-const ProgressBar = () => {
+const ProgressBar:FC = () => {
 
     const [progress, setProgress] = useState(new Animated.Value(0));
+    const animationRef = useRef<Animated.CompositeAnimation | null>(null);
+    const [isAnimated, setIsAnimated] = useState(false);
 
-    const fullIn = () => {
-        Animated.timing(progress, {
-            toValue: 100,
-            duration: 3000,
-            useNativeDriver: false,
-        }).start();
+    const fullIn = Animated.timing(progress, {
+        toValue: 100,
+        duration: 3000,
+        useNativeDriver: false,
+    });
+
+    const fullOut = Animated.timing(progress, {
+        toValue: 0,
+        duration: 3000,
+        useNativeDriver: false,
+    });
+
+    const startFullInOut = () => {
+        if (isAnimated) return;
+
+        setIsAnimated(true);
+
+        animationRef.current = Animated.loop(
+            Animated.sequence([
+                fullIn, 
+                fullOut
+            ]));
+        
+        animationRef.current.start();
     };
 
-    const fullOut = () => {
-        Animated.timing(progress, {
-            toValue: 0,
-            duration: 3000,
-            useNativeDriver: false,
-        }).start();
+    const stopFullInOut = () => {
+        setIsAnimated(false);
+        animationRef.current?.stop();
+        progress.setValue(0);
     }
 
     return (
@@ -26,8 +44,10 @@ const ProgressBar = () => {
             <View style={styles.container}>
                 <Animated.View style={[styles.bar, { width: progress }]}/>
             </View>
-            <Button title='FullIn' onPress={fullIn}/>
-            <Button title='FullOut' onPress={fullOut}/>
+            <View>
+                <Button title='Start' onPress={startFullInOut}/>
+                <Button title='Stop' onPress={stopFullInOut}/>
+            </View>
         </View>
     );
 };
@@ -38,6 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#aa6e6e',
     borderRadius: 10,
     margin: 10,
+    width: 100,
   },
   bar: {
     height: 20,
