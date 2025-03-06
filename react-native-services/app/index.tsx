@@ -1,4 +1,5 @@
 import { Text, View } from "react-native";
+import Card from "./components/card";
 
 export default function Index() {
   return (
@@ -10,7 +11,7 @@ export default function Index() {
         backgroundColor: '#c9d6cd',
       }}
     >
-      <Text>start page</Text>
+      <Card/>
     </View>
   );
 }
