@@ -12,7 +12,7 @@ export default function Index() {
       <Login/>
       {/* <WeaponsData/> */}
       {/* <WeaponsModel model="пм"/> */}
-      <WeaponsModelsAuth/>
+      {/* <WeaponsModelsAuth/> */}
     </View>
   );
 }

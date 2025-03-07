@@ -1,15 +1,12 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react';
-import { getToken } from '../utils/token';
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-type TreatDataItem = {
-    url: string,
-    method: string,
-    data: any,
-    isAuth?: boolean,
+type TCredentials = {
+    username: string,
+    password: string
 }
 
-const useAxiosAdmin = (_baseURL: string) => {
+const useAxiosAuth = (_baseURL: string) => {
     const [response, setResponse] = useState<any | undefined>(undefined);
     const [error, setError] = useState<string | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
@@ -25,11 +22,9 @@ const useAxiosAdmin = (_baseURL: string) => {
         return () => controller?.abort();
     }, []);
 
-    const treatData = async(item:TreatDataItem):Promise<void> => {
+    const treatData = async(data:{route:string, credentials: TCredentials}):Promise<void> => {
         
         setLoading(true);
-
-        if(item.isAuth) axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${await getToken() || ''}`;
 
         controller.abort();
         controller = new AbortController();
@@ -42,16 +37,16 @@ const useAxiosAdmin = (_baseURL: string) => {
         try{
             
             const result = await axiosInstance({
-                url: item.url,
-                method: item.method,
-                data: item.data,
+                url: data.route,
+                method: 'POST',
+                data: data.credentials,
                 signal: controller.signal,
                 
             });
 
             clearTimeout(timeoutId); // clear timeout if request completes
             setResponse(result.data);
-            console.log('result', result.data);
+            // console.log('result', result.data);
         } 
         catch(error){
             clearTimeout(timeoutId); // ensure timeout is cleared in case of an error
@@ -69,6 +64,6 @@ const useAxiosAdmin = (_baseURL: string) => {
     }
 
     return {response, error, loading, treatData}
-}
+};
 
-export default useAxiosAdmin;
+export default useAxiosAuth;
