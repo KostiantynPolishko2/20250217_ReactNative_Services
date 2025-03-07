@@ -19,7 +19,7 @@ const useAxiosAdmin = (_baseURL: string) => {
         return () => controller?.abort();
     }, []);
 
-    const treatData = async(item:{url: string, method: string}):Promise<void> => {
+    const treatData = async(item:{url: string, method: string, data:any}):Promise<void> => {
         setLoading(true);
 
         controller.abort();
@@ -34,6 +34,7 @@ const useAxiosAdmin = (_baseURL: string) => {
             const result = await axiosInstance({
                 url: item.url,
                 method: item.method,
+                data: item.data,
                 signal: controller.signal,
             });
             
