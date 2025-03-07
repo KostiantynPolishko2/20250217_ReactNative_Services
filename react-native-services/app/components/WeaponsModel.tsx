@@ -28,9 +28,10 @@ const WeaponsModel: FC<TWeaponsModel> = ({model}) => {
     // fetch weapons by model
     const getWeaponsModel = () => {
         treatData({
-            url: `model/${model}`,
+            route: `model/${model}`,
             method: 'GET',
-            data: {}
+            data: {},
+            jwt: null
         });
         // console.log('get weapons', response || error);
     }

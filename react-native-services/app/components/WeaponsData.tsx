@@ -21,9 +21,10 @@ const WeaponsData: FC = () => {
     // fetch all weapons models
     const getWeaponsData = () => {
         treatData({
-            url: 'client-models',
+            route: 'client-models',
             method: 'GET',
-            data: {}
+            data: {},
+            jwt: null
         });
         console.log('get weapons', response? response[0] : error);
     }

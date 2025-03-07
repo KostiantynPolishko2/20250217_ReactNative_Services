@@ -20,7 +20,7 @@ const WeaponsModelsAuth: FC = () => {
     // fetch weapons models
     const getWeaponsModels = async () => {
         treatData({
-            url: `models`,
+            route: `models`,
             method: 'GET',
             data:  {},
             jwt: await getValue()
@@ -30,7 +30,7 @@ const WeaponsModelsAuth: FC = () => {
 
     useEffect(()=>{
         setWeaponsModels(response);
-    }, [response])
+    }, [response]);
 
     return (
         <View>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import useTokenStorage from './useTokenStorage';
 
 type TreatDataItem = {
-    url: string,
+    route: string,
     method: string,
     data: any,
     jwt: string | null,
@@ -44,7 +44,7 @@ const useAxiosAdmin = (_baseURL: string) => {
         try{
             
             const result = await axiosInstance({
-                url: item.url,
+                url: item.route,
                 method: item.method,
                 data: item.data,
                 signal: controller.signal,

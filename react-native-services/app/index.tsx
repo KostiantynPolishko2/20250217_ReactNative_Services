@@ -2,6 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import WeaponsData from "./components/WeaponsData";
 import WeaponsModel from "./components/WeaponsModel";
 import WeaponsModelsAuth from "./components/WeaponsModelsAuth";
+import WeaponsPostNew from "./components/WeaponsPostNew";
 import Login from "./components/Login";
 
 
@@ -12,7 +13,8 @@ export default function Index() {
       <Login/>
       {/* <WeaponsData/> */}
       {/* <WeaponsModel model="пм"/> */}
-      <WeaponsModelsAuth/>
+      {/* <WeaponsModelsAuth/> */}
+      <WeaponsPostNew/>
     </View>
   );
 }
