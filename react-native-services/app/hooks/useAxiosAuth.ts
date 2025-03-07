@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-type TCredentials = {
+type TLoginModel = {
     username: string,
     password: string
 }
@@ -22,7 +22,7 @@ const useAxiosAuth = (_baseURL: string) => {
         return () => controller?.abort();
     }, []);
 
-    const treatData = async(data:{route:string, credentials: TCredentials}):Promise<void> => {
+    const treatData = async(data:{route:string, credentials: TLoginModel}):Promise<void> => {
         
         setLoading(true);
 

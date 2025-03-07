@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import useAxiosAdmin from "../hooks/useAxiosAdmin";
+import useTokenStorage from "../hooks/useTokenStorage";
 
 type WeaponsItemsDto = {
     model: string,
@@ -11,18 +12,18 @@ type WeaponsItemsDto = {
 const WeaponsModelsAuth: FC = () => {
 
     const _baseURL = 'http://adminpageserverpl2-dev.eba-pahpkfjc.eu-west-3.elasticbeanstalk.com/api/WeaponsItems';
+
     const {response, error, loading, treatData} = useAxiosAdmin(_baseURL);
+    const {saveValue, getValue, removeValue} = useTokenStorage('jwt');
     const [weaponsModels, setWeaponsModels] = useState<WeaponsItemsDto[] | undefined>(undefined);
 
-    // localStorage.clear();
-
     // fetch weapons models
-    const getWeaponsModels = () => {
+    const getWeaponsModels = async () => {
         treatData({
             url: `models`,
             method: 'GET',
             data:  {},
-            isAuth: true
+            jwt: await getValue()
         });
         // console.log('get weapons', response || error);
     }
@@ -33,7 +34,7 @@ const WeaponsModelsAuth: FC = () => {
 
     return (
         <View>
-            <Text>weapons model</Text>
+            <Text>auth: weapons model</Text>
             <Button title="GetModels" onPress={getWeaponsModels}/>
             {weaponsModels && <Text>{weaponsModels[0].model} | {weaponsModels[0].name} | {weaponsModels[0].type} </Text>}
             {loading && <Text>...loading</Text>}

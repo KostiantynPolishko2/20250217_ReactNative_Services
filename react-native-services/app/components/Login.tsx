@@ -1,11 +1,9 @@
 import React, { FC, useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
-import useAxiosAdmin from "../hooks/useAxiosAdmin";
 import useAxiosAuth from "../hooks/useAxiosAuth";
-import { saveToken, getToken } from "../utils/token";
-import { fetchToken } from "./LoginApi";
+import useTokenStorage from "../hooks/useTokenStorage";
 
-type TLoginData = {
+type TLoginModel = {
     username: string,
     password: string,
 }
@@ -13,33 +11,40 @@ type TLoginData = {
 const Login: FC = () => {
 
     const _baseURL = 'http://10.0.2.2:5185/api/Authenticate';
+    const loginData:TLoginModel = {username: 'polxs_wp31', password: 'n20ri2J9!'}
+    
     const {response, error, loading, treatData} = useAxiosAuth(_baseURL);
-    const loginData:TLoginData = {username: 'polxs_wp31', password: 'n20ri2J9!'}
+    const {saveValue, getValue, removeValue} = useTokenStorage('jwt');
 
     // fetch token auth
-    const getAuth = () => {
+    const auth = () => {
         treatData({
             route: 'login',
             credentials: loginData,
         });
-        console.log('jwt', response);
+        // console.log('jwt', response);
     }
 
-    // useEffect(()=>{
-        
-    //     (async()=>{
-    //         if(response){
-    //             setIsSaveToken(await saveToken(response));
-    //         }
-    //     })
-    //     ();
-    // }, [response]);
+    const getJWT = async() => {
+        console.log(await getValue());
+    }
+
+    useEffect(()=>{   
+        (async()=>{
+            if(response){
+                await removeValue();
+                await saveValue(response);
+            }
+        })
+        ();
+    }, [response]);
 
     return(
         <View>
             <Text>auth token</Text>
-            <Button title="Login" onPress={getAuth}/>
-            {/* <Button title="JWT" onPress={getToken}/> */}
+            <Button title="Login" onPress={auth}/>
+            <Button title="GetJWT" onPress={getJWT}/>
+            <Button title="DelJWT" onPress={removeValue}/>
             {loading && <Text>...loading</Text>}
         </View>
     );

@@ -1,12 +1,12 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react';
-import { getToken } from '../utils/token';
+import useTokenStorage from './useTokenStorage';
 
 type TreatDataItem = {
     url: string,
     method: string,
     data: any,
-    isAuth?: boolean,
+    jwt: string | null,
 }
 
 const useAxiosAdmin = (_baseURL: string) => {
@@ -29,7 +29,9 @@ const useAxiosAdmin = (_baseURL: string) => {
         
         setLoading(true);
 
-        if(item.isAuth) axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${await getToken() || ''}`;
+        if(item.jwt){
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${item.jwt}`;
+        }
 
         controller.abort();
         controller = new AbortController();
