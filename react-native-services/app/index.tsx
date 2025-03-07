@@ -3,6 +3,7 @@ import WeaponsData from "./components/WeaponsData";
 import WeaponsModel from "./components/WeaponsModel";
 import WeaponsModelsAuth from "./components/WeaponsModelsAuth";
 import WeaponsPostNew from "./components/WeaponsPostNew";
+import WeaponsDelete from "./components/WeaponsDelete";
 import Login from "./components/Login";
 
 
@@ -14,7 +15,8 @@ export default function Index() {
       {/* <WeaponsData/> */}
       {/* <WeaponsModel model="пм"/> */}
       {/* <WeaponsModelsAuth/> */}
-      <WeaponsPostNew/>
+      {/* <WeaponsPostNew/> */}
+      <WeaponsDelete/>
     </View>
   );
 }
