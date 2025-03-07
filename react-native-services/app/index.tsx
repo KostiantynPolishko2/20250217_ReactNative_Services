@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import WeaponsData from "./components/WeaponsData";
 import WeaponsModel from "./components/WeaponsModel";
+import WeaponsModelsAuth from "./components/WeaponsModelsAuth";
 
 
 export default function Index() {
@@ -8,7 +9,8 @@ export default function Index() {
     <View style={styles.body}>
       <Text>weapons axios request GET</Text>
       {/* <WeaponsData/> */}
-      <WeaponsModel model="пб"/>
+      {/* <WeaponsModel model="пб"/> */}
+      <WeaponsModelsAuth/>
     </View>
   );
 }

@@ -10,6 +10,8 @@ const useAxiosAdmin = (_baseURL: string) => {
         baseURL: _baseURL,
     });
 
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+
     let controller = new AbortController();
 
     // to abort axios request when parent component is unmounted
