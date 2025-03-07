@@ -23,6 +23,7 @@ const WeaponsData: FC = () => {
         treatData({
             url: 'client-models',
             method: 'GET',
+            data: {}
         });
         console.log('get weapons', response? response[0] : error);
     }

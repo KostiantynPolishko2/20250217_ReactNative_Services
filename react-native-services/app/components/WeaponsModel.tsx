@@ -30,6 +30,7 @@ const WeaponsModel: FC<TWeaponsModel> = ({model}) => {
         treatData({
             url: `model/${model}`,
             method: 'GET',
+            data: {}
         });
         // console.log('get weapons', response || error);
     }

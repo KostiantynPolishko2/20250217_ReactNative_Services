@@ -21,6 +21,7 @@ const WeaponsModelsAuth: FC = () => {
         treatData({
             url: `models`,
             method: 'GET',
+            data:  {}
         });
         console.log('get weapons', response || error);
     }

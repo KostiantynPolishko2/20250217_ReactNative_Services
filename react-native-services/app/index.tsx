@@ -11,7 +11,7 @@ export default function Index() {
       <Text>weapons axios request GET</Text>
       <Login/>
       {/* <WeaponsData/> */}
-      {/* <WeaponsModel model="пб"/> */}
+      {/* <WeaponsModel model="пм"/> */}
       <WeaponsModelsAuth/>
     </View>
   );
