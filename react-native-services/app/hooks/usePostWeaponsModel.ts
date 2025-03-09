@@ -17,7 +17,7 @@ const usePostWeaponsModel = (_baseURL: string) => {
             data:  newWeaponsDataDto,
             jwt: await getValue()
         });
-        console.log('post model', response || error);
+        // console.log('post model', response || error);
     }
 
     useEffect(()=>{

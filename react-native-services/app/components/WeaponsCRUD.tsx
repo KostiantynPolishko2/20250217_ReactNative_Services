@@ -1,8 +1,53 @@
-import React, { FC, useState, useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import React, { FC } from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
 import useDeleteWeaponsModel from "../hooks/useDeleteWeaponsModel";
 import usePostWeaponsModel from "../hooks/usePostWeaponsModel";
+import useGetWeaponsItems from "../hooks/useGetWeaponsItems";
+import useGetWeaponsModel from "../hooks/useGetWeaponsModel";
+import useGetWeaponsModels from "../hooks/useGetWeaponsModels";
 import { WeaponsDataDto } from "../types/AdminServerTypes";
+
+export const GetModels: FC = () => {
+
+    const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
+    const {weaponsModels, loading, get} = useGetWeaponsModels(_baseURL);
+
+    return(
+        <View style={styles.body}>
+            <Button title="GetModels" onPress={get}/>
+            {weaponsModels && <Text>1. {weaponsModels[0].model} - {weaponsModels[0].price}</Text>}
+            {loading && <Text>...loading</Text>}
+        </View>
+    );
+};
+
+export const GetModelByName: FC<{model:string}> = (props) => {
+
+    const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
+    const {weaponsModel, loading, get} = useGetWeaponsModel(_baseURL);
+    
+    return (
+        <View style={styles.body}>
+            <Button title="GetModel" onPress={()=>{get(props.model)}}/>
+            {weaponsModel && <Text>{weaponsModel.model} | {weaponsModel.name} | {weaponsModel.price} </Text>}
+            {loading && <Text>...loading</Text>}
+        </View>
+    );
+};
+
+export const GetItems: FC = () => {
+
+    const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
+    const {weaponsItems, loading, get} = useGetWeaponsItems(_baseURL);
+    
+    return (
+        <View style={styles.body}>
+            <Button title="GetItems" onPress={get}/>
+            {weaponsItems && <Text>{weaponsItems[0].model} | {weaponsItems[0].name} | {weaponsItems[0].type} </Text>}
+            {loading && <Text>...loading</Text>}
+        </View>
+    );
+};
 
 export const Delete:FC<{model: string}> = ({model}) => {
 
@@ -10,7 +55,7 @@ export const Delete:FC<{model: string}> = ({model}) => {
     const {isRemove, loading, remove} = useDeleteWeaponsModel(_baseURL);
 
     return(
-        <View>
+        <View style={styles.body}>
             <Button title="DeleteModel" onPress={()=>{remove(model)}}/>
             {isRemove && <Text>deleted: {model}</Text>}
             {loading && <Text>...processing</Text>}
@@ -23,10 +68,18 @@ export const Post:FC<{weaponsModel:WeaponsDataDto}> = ({weaponsModel}) => {
     const {isPost, loading, post} = usePostWeaponsModel(_baseURL);
 
     return(
-        <View>
+        <View style={styles.body}>
             <Button title="PostModel" onPress={()=>{post(weaponsModel)}}/>
             {isPost && <Text>posted: {weaponsModel.weaponsItem.Model}</Text>}
             {loading && <Text>...processing</Text>}
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    body: {
+        backgroundColor: '#c6eb4f',
+        margin: 5,
+        padding: 5,
+    }
+});
