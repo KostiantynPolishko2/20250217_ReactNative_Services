@@ -10,7 +10,7 @@ type TLoginModel = {
 
 const Login: FC = () => {
 
-    const _baseURL = 'http://10.0.2.2:5185/api/Authenticate';
+    const _baseURL = process.env.EXPO_PUBLIC_ASPENT_AUTHSERVER_URL || '';
     const loginData:TLoginModel = {username: 'polxs_wp31', password: 'n20ri2J9!'}
     
     const {response, error, loading, treatData} = useAxiosAuth(_baseURL);
