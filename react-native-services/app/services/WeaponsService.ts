@@ -25,7 +25,7 @@ export class ApiWeaponsService implements IWeaponsServices {
             }))
             : [];
 
-        console.log('weapons items', weaponsItems && weaponsItems[0]);
+        // console.log('weapons items', weaponsItems && weaponsItems[0]);
 
         return weaponsItems;
     }
