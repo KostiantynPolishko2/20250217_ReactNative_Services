@@ -8,14 +8,14 @@ const useGetWeaponsModels = (_baseURL: string) => {
     const [weaponsModels, setWeaponsModels] = useState<WeaponsCardDto[] | undefined>(undefined);
 
     // get all weapons models
-    const get = () => {
+    const get = ():void => {
         treatData({
             route: 'client-models',
             method: 'GET',
             data: {},
             jwt: null
         });
-        // console.log('get weapons', response? response[0] : error);
+        console.log('get weapons', response? response[0] : error);
     }
 
     useEffect(()=>{

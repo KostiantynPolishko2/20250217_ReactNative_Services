@@ -1,34 +1,43 @@
 import React, { FC } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import useDeleteWeaponsModel from "../hooks/useDeleteWeaponsModel";
 import usePostWeaponsModel from "../hooks/usePostWeaponsModel";
 import useGetWeaponsItems from "../hooks/useGetWeaponsItems";
 import useGetWeaponsModel from "../hooks/useGetWeaponsModel";
 import useGetWeaponsModels from "../hooks/useGetWeaponsModels";
 import { WeaponsDataDto } from "../types/AdminServerTypes";
+import { IconButton } from "../ui/Button";
 
 export const GetModels: FC = () => {
 
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
     const {weaponsModels, loading, get} = useGetWeaponsModels(_baseURL);
 
+    const handleTest = () => {
+        console.log('call handle test2')
+    }
+
     return(
         <View style={styles.body}>
-            <Button title="GetModels" onPress={get}/>
+            <TouchableOpacity onPress={get}>
+                <IconButton/>
+            </TouchableOpacity>
             {weaponsModels && <Text>1. {weaponsModels[0].model} - {weaponsModels[0].price}</Text>}
             {loading && <Text>...loading</Text>}
         </View>
     );
 };
 
-export const GetModelByName: FC<{model:string}> = (props) => {
+export const GetModelByName: FC<{model:string}> = ({model}) => {
 
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
     const {weaponsModel, loading, get} = useGetWeaponsModel(_baseURL);
     
     return (
         <View style={styles.body}>
-            <Button title="GetModel" onPress={()=>{get(props.model)}}/>
+            <TouchableOpacity onPress={()=>{get(model)}}>
+                <IconButton title="GetModelByName"/>
+            </TouchableOpacity>
             {weaponsModel && <Text>{weaponsModel.model} | {weaponsModel.name} | {weaponsModel.price} </Text>}
             {loading && <Text>...loading</Text>}
         </View>
