@@ -8,12 +8,12 @@ export interface IWeaponsServices {
 };
 
 export type WeaponsItem = {
+    isVisible: boolean,
     model: string,
     price: number,
-    isVisible: boolean,
-    image_path: string,
 }
 
 export type WeaponsModel = WeaponsItem & {
+    name: string,
     image_path: string,
 }

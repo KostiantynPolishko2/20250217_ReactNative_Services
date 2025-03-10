@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
 import { IWeaponsServices, WeaponsItem, WeaponsModel } from "./IWeaponsService";
-import useGetWeaponsModels from "../hooks/useGetWeaponsModels";
 import useAxiosAdmin from "../hooks/useAxiosAdmin";
+import { getWeaponsCardDto } from "../api/ApiAdminServer";
+import { WeaponsCardDto } from "../types/AdminServerTypes";
 
 
 export class ApiWeaponsService implements IWeaponsServices {
@@ -11,40 +11,28 @@ export class ApiWeaponsService implements IWeaponsServices {
         this._baseURL = _baseURL;
     };
 
-    async getWeaponsItems(): Promise<WeaponsItem[] | undefined> {
-        const {response, error, loading, treatData} = useAxiosAdmin(this._baseURL);
+    async getWeaponsItems(): Promise<WeaponsItem[]> {
 
-        // get weapons by model
-        await treatData({
-            route: `client-models`,
-            method: 'GET',
-            data: {},
-            jwt: null
-        });
-        // console.log('get weapons items', response || error);
+        const weaponsCardDto: WeaponsCardDto[] = await getWeaponsCardDto(this._baseURL);
 
-        let weaponsItems:WeaponsItem[] | undefined = Array.isArray(response) 
-            ? (response as WeaponsItem[]).filter(item=>item.isVisible)
-            : undefined;
+        let weaponsItems:WeaponsItem[] = weaponsCardDto.length
+            ? (weaponsCardDto as WeaponsItem[]).
+            filter(item=>item.isVisible).
+            map(item => ({
+                isVisible: item.isVisible,
+                model: item.model,
+                price: item.price,
+            }))
+            : [];
+
+        console.log('weapons items', weaponsItems && weaponsItems[0]);
 
         return weaponsItems;
     }
 
 
     async getWeaponsModel(model: string): Promise<WeaponsModel | undefined> {
-        const {response, error, loading, treatData} = useAxiosAdmin(this._baseURL);
-    
-        // get weapons by model
-        await treatData({
-            route: `model/${model}`,
-            method: 'GET',
-            data: {},
-            jwt: null
-        });
-        // console.log('get weapons model', response || error);
-        
-        let weaponsModel: WeaponsModel | undefined = response as WeaponsModel;
 
-        return weaponsModel
+        return undefined;
     };
 }

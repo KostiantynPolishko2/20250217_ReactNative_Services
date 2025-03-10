@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { RowPositionStyle } from "./styles";
+import { PositionStyle } from "./styles";
 
 export const IconButtonStyle = StyleSheet.create({
     body: {
-        ...RowPositionStyle.body,
+        ...PositionStyle.row,
         backgroundColor: 'grey',
         borderRadius: 5,
     },
