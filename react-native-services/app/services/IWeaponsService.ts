@@ -2,7 +2,7 @@ import { WeaponsCardDto } from "../types/AdminServerTypes";
 
 export interface IWeaponsServices {
 
-    getWeaponsItems(): Promise<WeaponsItem[] | undefined>;
+    getWeaponsItems(): Promise<WeaponsItem[]>;
 
     getWeaponsModel(model: string): Promise<WeaponsModel | undefined>;
 };

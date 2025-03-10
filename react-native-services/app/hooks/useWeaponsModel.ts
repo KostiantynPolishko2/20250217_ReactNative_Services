@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { IWeaponsServices } from "../services/IWeaponsService";
-import { WeaponsItem } from "../services/IWeaponsService";
+import { WeaponsModel } from "../services/IWeaponsService";
 
 
-const useWeaponsItems = (weaponsService: IWeaponsServices) => {
+const useWeaponsModel = (weaponsService: IWeaponsServices, model: string) => {
 
-    const [weaponsItems, setWeaponsItems] = useState<WeaponsItem[]>([]);
+    const [weaponsModel, setWeaponsModel] = useState<WeaponsModel | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
 
         useEffect(()=>{
-        weaponsService.getWeaponsItems().
+        weaponsService.getWeaponsModel(model).
         then((data)=>{
-            setWeaponsItems(data || []);
+            setWeaponsModel(data || undefined);
             setLoading(true);
         }).
         catch(error => console.log('weaponns items error->: ', error)).
@@ -19,7 +19,7 @@ const useWeaponsItems = (weaponsService: IWeaponsServices) => {
 
     }, [weaponsService]);
 
-    return {loading, weaponsItems};
+    return {loading, weaponsModel};
 }
 
-export default useWeaponsItems;
+export default useWeaponsModel;

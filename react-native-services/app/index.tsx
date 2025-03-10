@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { Delete, Post, GetItems, GetModelByName, GetModels } from "./components/WeaponsCRUD";
 import Login from "./components/Login";
 import { arrNewWeaponsModels } from "./mock/AdminServerTestData";
-import WeaponsList from "./components/WeaponsList";
+import WeaponsList from "./components/ClientPage";
 
 export default function Index() {
   return (
