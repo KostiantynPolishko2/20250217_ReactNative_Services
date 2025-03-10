@@ -11,9 +11,9 @@ export default function Index() {
       <Login/>
       <Text>weapons CRUD</Text>
       <GetModels/>
-      <GetModelByName model="пм"/>
+      <GetModelByName model="АКМ"/>
       <GetItems/>
-      <Post weaponsModel={arrNewWeaponsModels[0]}/>
+      <Post weaponsModel={arrNewWeaponsModels[1]}/>
       <Delete model="item_model1"/>
     </View>
   );

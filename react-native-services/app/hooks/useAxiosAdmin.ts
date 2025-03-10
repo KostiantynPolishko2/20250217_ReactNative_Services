@@ -48,7 +48,6 @@ const useAxiosAdmin = (_baseURL: string) => {
                 method: item.method,
                 data: item.data,
                 signal: controller.signal,
-                
             });
 
             clearTimeout(timeoutId); // clear timeout if request completes

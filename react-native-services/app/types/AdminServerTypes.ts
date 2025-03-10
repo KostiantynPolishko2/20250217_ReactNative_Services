@@ -23,7 +23,7 @@ export type WeaponsDataDto = {
     weaponsImage: WeaponsImage
 };
 
-export type WeaponsItemsDto = {
+export type WeaponsItemDto = {
     model: string,
     name: string,
     type: string,

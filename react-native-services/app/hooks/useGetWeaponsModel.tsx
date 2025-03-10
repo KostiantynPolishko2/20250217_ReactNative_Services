@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Button } from "react-native";
+import { useState, useEffect } from "react";
 import useAxiosAdmin from "./useAxiosAdmin";
 import { WeaponsCardDto } from "../types/AdminServerTypes";
 
 const useGetWeaponsModel = (_baseURL: string) => {
     const {response, error, loading, treatData} = useAxiosAdmin(_baseURL);
-    const [weaponsModel, setWeaponsModel] = useState<WeaponsCardDto | undefined>(undefined);
+    const [weaponsCardDto, setWeaponsCardDto] = useState<WeaponsCardDto | undefined>(undefined);
 
     // get weapons by model
-    const get = (model: string) => {
-        treatData({
+    const get = async (model: string):Promise<void> => {
+        await treatData({
             route: `model/${model}`,
             method: 'GET',
             data: {},
@@ -19,10 +18,10 @@ const useGetWeaponsModel = (_baseURL: string) => {
     }
 
     useEffect(()=>{
-        setWeaponsModel(response);
+        setWeaponsCardDto(response);
     }, [response])
 
-    return {weaponsModel, loading, get};
+    return {weaponsCardDto, loading, get};
 }
 
 export default useGetWeaponsModel;

@@ -13,14 +13,10 @@ export const GetModels: FC = () => {
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
     const {weaponsModels, loading, get} = useGetWeaponsModels(_baseURL);
 
-    const handleTest = () => {
-        console.log('call handle test2')
-    }
-
     return(
         <View style={styles.body}>
             <TouchableOpacity onPress={get}>
-                <IconButton/>
+                <IconButton title="GetModels"/>
             </TouchableOpacity>
             {weaponsModels && <Text>1. {weaponsModels[0].model} - {weaponsModels[0].price}</Text>}
             {loading && <Text>...loading</Text>}
@@ -31,14 +27,14 @@ export const GetModels: FC = () => {
 export const GetModelByName: FC<{model:string}> = ({model}) => {
 
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
-    const {weaponsModel, loading, get} = useGetWeaponsModel(_baseURL);
+    const {weaponsCardDto, loading, get} = useGetWeaponsModel(_baseURL);
     
     return (
         <View style={styles.body}>
             <TouchableOpacity onPress={()=>{get(model)}}>
                 <IconButton title="GetModelByName"/>
             </TouchableOpacity>
-            {weaponsModel && <Text>{weaponsModel.model} | {weaponsModel.name} | {weaponsModel.price} </Text>}
+            {weaponsCardDto && <Text>{weaponsCardDto.model} | {weaponsCardDto.name} | {weaponsCardDto.price} </Text>}
             {loading && <Text>...loading</Text>}
         </View>
     );

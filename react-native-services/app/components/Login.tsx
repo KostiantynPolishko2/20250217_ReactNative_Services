@@ -2,13 +2,11 @@ import React, { FC, useState, useEffect } from "react";
 import { View, Text, Button } from "react-native";
 import useAxiosAuth from "../hooks/useAxiosAuth";
 import useTokenStorage from "../hooks/useTokenStorage";
-import { LoginModel } from "../types/AuthServerTypes";
+import { loginModels } from "../mock/AuthServerTestData";
 
 const Login: FC = () => {
 
-    const _baseURL = process.env.EXPO_PUBLIC_ASPENT_AUTHSERVER_URL || '';
-    const loginModel:LoginModel = {username: 'polxs_wp31', password: 'n20ri2J9!'}
-    
+    const _baseURL = process.env.EXPO_PUBLIC_ASPENT_AUTHSERVER_URL || '';  
     const {response, error, loading, treatData} = useAxiosAuth(_baseURL);
     const {saveValue, getValue, removeValue} = useTokenStorage('jwt');
 
@@ -16,7 +14,7 @@ const Login: FC = () => {
     const auth = () => {
         treatData({
             route: 'login',
-            credentials: loginModel,
+            credentials: loginModels[0],
         });
         // console.log('jwt', response);
     }

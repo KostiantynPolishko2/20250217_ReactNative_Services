@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import useAxiosAdmin from "./useAxiosAdmin";
 import useTokenStorage from "./useTokenStorage";
-import { WeaponsItemsDto } from "../types/AdminServerTypes";
+import { WeaponsItemDto } from "../types/AdminServerTypes";
 
 const useGetWeaponsItems = (_baseURL: string) => {
     const {response, error, loading, treatData} = useAxiosAdmin(_baseURL);
     const {saveValue, getValue, removeValue} = useTokenStorage('jwt');
-    const [weaponsItems, setWeaponsItems] = useState<WeaponsItemsDto[] | undefined>(undefined);
+    const [weaponsItems, setWeaponsItems] = useState<WeaponsItemDto[] | undefined>(undefined);
 
     // get weapons items
     const get = async () => {
