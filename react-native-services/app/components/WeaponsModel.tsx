@@ -1,9 +1,10 @@
-import React, { FC } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import React, { FC, useState, useEffect } from "react";
+import { View, Text, Image } from "react-native";
 import { IWeaponsServices } from "../services/IWeaponsService";
-import useWeaponsModel from "../hooks/useWeaponsModel";
-import { PositionStyle } from "../styles/styles";
-import alt_img from '@/assets/images/ua-army-force.png';
+import { styles } from "../styles/weapons-model";
+import { weaponsModelDefault } from "../constants/Weapons";
+import useGetWeaponsCardDto from "../hooks/useGetWeaponsCardDto";
+import { WeaponsModelProps } from "../services/IWeaponsService";
 
 interface WeaponsItemsProps {
     weaponsService: IWeaponsServices;
@@ -12,7 +13,17 @@ interface WeaponsItemsProps {
 
 const WeaponsModel: FC<WeaponsItemsProps> = ({weaponsService, model}) => {
 
-    const {weaponsModel, error, loading} = useWeaponsModel(weaponsService, model);
+    const {error, loading, weaponsCardDto, get} = useGetWeaponsCardDto(process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '');
+    const [weaponsModel, setWeaponsModel] = useState<WeaponsModelProps>(weaponsModelDefault);
+    
+    useEffect(()=>{
+        (async ()=>{ await get(model)})();
+    }, [model]);
+
+    useEffect(()=>{
+        if(weaponsCardDto)
+            setWeaponsModel(weaponsService.getWeaponsModel(weaponsCardDto));
+    }, [weaponsCardDto]);
 
     if (loading) return <Text>...loaded weapons model</Text>;
 
@@ -20,37 +31,17 @@ const WeaponsModel: FC<WeaponsItemsProps> = ({weaponsService, model}) => {
         throw new Error(error);
     }
 
-    // console.log('weapons model', weaponsModel);
-
     return (
             <View style={styles.body}>
-                <Image style={styles.body_img} source={{ uri: encodeURI(weaponsModel?.image_path || alt_img) }} alt='weapons model'/>
+                <Image style={styles.body_img} source={{ uri: weaponsModel.image_path}} alt='weapons model'/>
                 <View>
                     <Text>weapons</Text>
-                    <Text>model: {weaponsModel?.model}</Text>
-                    <Text>name: {weaponsModel?.name}</Text>
-                    <Text>price: {weaponsModel?.price}</Text>
+                    <Text>model: {weaponsModel.model}</Text>
+                    <Text>name: {weaponsModel.name}</Text>
+                    <Text>price: {weaponsModel.price}</Text>
                 </View>
             </View>
     );
 };
-
-const styles = StyleSheet.create({
-    body: {
-        backgroundColor: 'wheat',
-        padding: 5,
-        ...PositionStyle.row,
-        justifyContent: 'space-around',
-    },
-    body_img: {
-        width: 100,
-        height: 100,
-        borderRadius: 5,
-        margin: 5,
-        borderColor: 'black',
-        borderWidth: 1,
-        borderStyle: 'solid',
-    }
-});
 
 export default WeaponsModel;

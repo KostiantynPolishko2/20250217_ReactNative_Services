@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from "react";
-import { View, Text, Button } from "react-native";
 import ErrorFallback from "./ErroFallback";
 
 interface Props {

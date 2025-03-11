@@ -13,7 +13,7 @@ const ClientPage: FC = () => {
             <Text>weapons items</Text>
             <WeaponsItems weaponsService={weaponsService}/>
             <WithErrorBoundary>
-                <WeaponsModel weaponsService={weaponsService} model="пб_"/>
+                <WeaponsModel weaponsService={weaponsService} model="пм"/>
             </WithErrorBoundary>
         </View>
     );

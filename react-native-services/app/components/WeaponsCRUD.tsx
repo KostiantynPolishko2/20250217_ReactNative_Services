@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
 import useDeleteWeaponsModel from "../hooks/useDeleteWeaponsModel";
 import usePostWeaponsModel from "../hooks/usePostWeaponsModel";
 import useGetWeaponsItems from "../hooks/useGetWeaponsItems";
-import useGetWeaponsModel from "../hooks/useGetWeaponsModel";
+import useGetWeaponsModel from "../hooks/useGetWeaponsCardDto";
 import useGetWeaponsModels from "../hooks/useGetWeaponsModels";
 import { WeaponsDataDto } from "../types/AdminServerTypes";
 import { IconButton } from "../ui/Button";

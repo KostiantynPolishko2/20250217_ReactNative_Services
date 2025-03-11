@@ -1,12 +1,13 @@
 import axios from "axios";
 import { WeaponsCardDto } from "../types/AdminServerTypes";
+import { MILISECONDS_PER_SECOND } from "../constants/Time";
 
 export const getWeaponsCardsDto = async(_baseURL: string):Promise<WeaponsCardDto[]> => {
 
     const axiosInstance = axios.create({
         baseURL: _baseURL,
         responseType: 'json',
-        timeout: 5000,
+        timeout: 5 * MILISECONDS_PER_SECOND,
     });
 
     try{
@@ -24,7 +25,7 @@ export const getWeaponsCardDtoByModel = async(_baseURL: string, model: string):P
     const axiosInstance = axios.create({
         baseURL: _baseURL,
         responseType: 'json',
-        timeout: 5000,
+        timeout: 5 * MILISECONDS_PER_SECOND,
     });
 
     try{
