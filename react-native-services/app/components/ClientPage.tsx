@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { ApiWeaponsService } from "../services/WeaponsService";
+import WithErrorBoundary from "../hocs/WithErrorBoundary";
 import WeaponsItems from "./WeaponsItems";
 import WeaponsModel from "./WeaponsModel";
 
@@ -11,7 +12,9 @@ const ClientPage: FC = () => {
         <View>
             <Text>weapons items</Text>
             <WeaponsItems weaponsService={weaponsService}/>
-            <WeaponsModel weaponsService={weaponsService} model="ПМ"/>
+            <WithErrorBoundary>
+                <WeaponsModel weaponsService={weaponsService} model="пб_"/>
+            </WithErrorBoundary>
         </View>
     );
 };

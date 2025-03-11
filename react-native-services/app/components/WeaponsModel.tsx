@@ -12,9 +12,13 @@ interface WeaponsItemsProps {
 
 const WeaponsModel: FC<WeaponsItemsProps> = ({weaponsService, model}) => {
 
-    const {loading, weaponsModel} = useWeaponsModel(weaponsService, model);
+    const {weaponsModel, error, loading} = useWeaponsModel(weaponsService, model);
 
     if (loading) return <Text>...loaded weapons model</Text>;
+
+    if (error){
+        throw new Error(error);
+    }
 
     // console.log('weapons model', weaponsModel);
 

@@ -33,6 +33,10 @@ export const getWeaponsCardDtoByModel = async(_baseURL: string, model: string):P
     }
     catch(error){
         console.log('get WeaponsCardDtoByModel error:', error);
-        return undefined
+        // return undefined
+        if (error instanceof Error)
+            throw new Error(`${(error as Error).name}: ${(error as Error).message}`);
+        else
+            throw new Error('unknown error occured');
     }
 };

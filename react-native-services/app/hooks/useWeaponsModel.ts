@@ -6,20 +6,24 @@ import { WeaponsModel } from "../services/IWeaponsService";
 const useWeaponsModel = (weaponsService: IWeaponsServices, model: string) => {
 
     const [weaponsModel, setWeaponsModel] = useState<WeaponsModel | undefined>(undefined);
+    const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-        useEffect(()=>{
+    useEffect(()=>{
         weaponsService.getWeaponsModel(model).
         then((data)=>{
             setWeaponsModel(data || undefined);
             setLoading(true);
         }).
-        catch(error => console.log('weaponns items error->: ', error)).
+        catch(error => {
+            console.log('weaponns items error->: ', error);
+            setError(`${error}`);
+        }).
         finally(()=>{setLoading(false);})
 
     }, [weaponsService]);
 
-    return {loading, weaponsModel};
+    return {weaponsModel, error, loading};
 }
 
 export default useWeaponsModel;
