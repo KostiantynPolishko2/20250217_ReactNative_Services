@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
-import { ApiWeaponsService } from "../services/WeaponsService";
+import { View, Text } from "react-native";
+import { WeaponsService } from "../services/WeaponsService";
 import WithErrorBoundary from "../hocs/WithErrorBoundary";
 import WeaponsItems from "./WeaponsItems";
 import WeaponsModel from "./WeaponsModel";
 
-const weaponsService = new ApiWeaponsService(process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '')
+const weaponsService = new WeaponsService()
 
 const ClientPage: FC = () => {
     return(
@@ -13,7 +13,7 @@ const ClientPage: FC = () => {
             <Text>weapons items</Text>
             <WeaponsItems weaponsService={weaponsService}/>
             <WithErrorBoundary>
-                <WeaponsModel weaponsService={weaponsService} model="пм"/>
+                <WeaponsModel weaponsService={weaponsService} model="пб"/>
             </WithErrorBoundary>
         </View>
     );

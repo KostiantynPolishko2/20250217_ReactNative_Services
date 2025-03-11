@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react';
-import useTokenStorage from './useTokenStorage';
 
 type TreatDataItem = {
     route: string,
@@ -11,7 +10,7 @@ type TreatDataItem = {
 
 const useAxiosAdmin = (_baseURL: string) => {
     const [response, setResponse] = useState<any | undefined>(undefined);
-    const [error, setError] = useState<string | undefined>(undefined);
+    const [error, setError] = useState<Error | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
     const axiosInstance = axios.create({
@@ -52,17 +51,19 @@ const useAxiosAdmin = (_baseURL: string) => {
 
             clearTimeout(timeoutId); // clear timeout if request completes
             setResponse(result.data);
-            console.log('result', result.data);
+            // console.log('result', result.data);
         } 
         catch(error){
             clearTimeout(timeoutId); // ensure timeout is cleared in case of an error
 
-            if(axios.isCancel(error)){
-                setError('axios request was aborted!');
-            }
-            else{
-                setError('undefined error');
-            }
+            setError(error as Error);
+            
+            // if(axios.isCancel(error)){
+            //     setError('axios request was aborted!');
+            // }
+            // else{
+            //     setError('undefined error');
+            // }
         } 
         finally {
             setLoading(false);

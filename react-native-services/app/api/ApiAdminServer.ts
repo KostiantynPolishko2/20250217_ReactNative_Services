@@ -1,8 +1,8 @@
 import axios from "axios";
-import { WeaponsCardDto } from "../types/AdminServerTypes";
-import { MILISECONDS_PER_SECOND } from "../constants/Time";
+import { WeaponsCardDtoProps } from "../types/AdminServerTypes";
+import { MILISECONDS_PER_SECOND } from "../constants/time";
 
-export const getWeaponsCardsDto = async(_baseURL: string):Promise<WeaponsCardDto[]> => {
+export const getWeaponsCardsDto = async(_baseURL: string):Promise<WeaponsCardDtoProps[]> => {
 
     const axiosInstance = axios.create({
         baseURL: _baseURL,
@@ -12,7 +12,7 @@ export const getWeaponsCardsDto = async(_baseURL: string):Promise<WeaponsCardDto
 
     try{
         const response = await axiosInstance.get('client-models');
-        return response.data as WeaponsCardDto[];
+        return response.data as WeaponsCardDtoProps[];
     }
     catch(error){
         console.log('get WeaponsCardsDto error:', error);
@@ -20,7 +20,7 @@ export const getWeaponsCardsDto = async(_baseURL: string):Promise<WeaponsCardDto
     }
 };
 
-export const getWeaponsCardDtoByModel = async(_baseURL: string, model: string):Promise<WeaponsCardDto | undefined> => {
+export const getWeaponsCardDtoByModel = async(_baseURL: string, model: string):Promise<WeaponsCardDtoProps | undefined> => {
 
     const axiosInstance = axios.create({
         baseURL: _baseURL,
@@ -30,7 +30,7 @@ export const getWeaponsCardDtoByModel = async(_baseURL: string, model: string):P
 
     try{
         const response = await axiosInstance.get(`model/${model}`);
-        return response.data as WeaponsCardDto;
+        return response.data as WeaponsCardDtoProps;
     }
     catch(error){
         console.log('get WeaponsCardDtoByModel error:', error);

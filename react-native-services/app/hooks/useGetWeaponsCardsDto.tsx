@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAxiosAdmin from "./useAxiosAdmin";
-import { WeaponsCardDto } from "../types/AdminServerTypes";
+import { WeaponsCardDtoProps } from "../types/AdminServerTypes";
 
-const useGetWeaponsModels = (_baseURL: string) => {
+const useGetWeaponsCardsDto = (_baseURL: string) => {
     const {response, error, loading, treatData} = useAxiosAdmin(_baseURL);
-    const [weaponsModels, setWeaponsModels] = useState<WeaponsCardDto[] | undefined>(undefined);
+    const [weaponsCardsDto, setWeaponsCardsDto] = useState<WeaponsCardDtoProps[] | undefined>(undefined);
 
     // get all weapons models
     const get = async ():Promise<void> => {
@@ -18,10 +18,10 @@ const useGetWeaponsModels = (_baseURL: string) => {
     }
 
     useEffect(()=>{
-        setWeaponsModels(response);
+        setWeaponsCardsDto(response);
     }, [response]);
 
-    return {weaponsModels, loading, get};
+    return {error, loading, weaponsCardsDto, get};
 }
 
-export default useGetWeaponsModels;
+export default useGetWeaponsCardsDto;

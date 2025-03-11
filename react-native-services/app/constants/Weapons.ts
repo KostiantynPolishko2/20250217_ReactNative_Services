@@ -1,5 +1,5 @@
 import { WeaponsModelProps } from '../services/IWeaponsService';
-import { WeaponsCardDto } from '../types/AdminServerTypes';
+import { WeaponsCardDtoProps, WeaponsItemDtoProps } from '../types/AdminServerTypes';
 
 export const weaponsModelDefault: WeaponsModelProps = {
     isVisible: false,
@@ -7,9 +7,9 @@ export const weaponsModelDefault: WeaponsModelProps = {
     price: 0,
     name: 'undefined',
     image_path: '@/assets/images/ua-army-force.png',
-}
+};
 
-export const weaponsCardDtoDefault: WeaponsCardDto = {
+export const weaponsCardDtoDefault: WeaponsCardDtoProps = {
     model: 'undefined',
     name: 'undefined',
     isVisible: false,
@@ -17,4 +17,10 @@ export const weaponsCardDtoDefault: WeaponsCardDto = {
     weight: 0,
     description: 'undefined',
     image_path: '@/assets/images/ua-army-force.png',
-}
+};
+
+export const weaponsItemDto: WeaponsItemDtoProps = {
+    model: 'undefined',
+    name: 'undefined',
+    type: 'undefined',
+};

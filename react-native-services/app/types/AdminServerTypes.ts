@@ -1,35 +1,35 @@
-type WeaponsImage = {
+type WeaponsImageProps = {
     name: string,
     path: string
 };
 
-type WeaponsItem = {
+type WeaponsItemProps = {
     Model: string,
     Name: string,
     Type: string,
     isVisible: boolean
 };
 
-type WeaponsProperty = {
+type WeaponsPropertyProps = {
     price: number,
     weight: number,
     Vendor: string,
     Description: string,
 };
 
-export type WeaponsDataDto = {
-    weaponsItem: WeaponsItem,
-    weaponsProperty: WeaponsProperty,
-    weaponsImage: WeaponsImage
+export type WeaponsDataDtoProps = {
+    weaponsItem: WeaponsItemProps,
+    weaponsProperty: WeaponsPropertyProps,
+    weaponsImage: WeaponsImageProps
 };
 
-export type WeaponsItemDto = {
+export type WeaponsItemDtoProps = {
     model: string,
     name: string,
     type: string,
 };
 
-export type WeaponsCardDto = {
+export type WeaponsCardDtoProps = {
     model: string,
     name: string,
     isVisible: boolean,

@@ -1,24 +1,35 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { IWeaponsServices } from "../services/IWeaponsService";
-import useWeaponsItems from "../hooks/useWeaponsItems";
+import useGetWeaponsCardsDto from "../hooks/useGetWeaponsCardsDto";
+import { WeaponsItemProps } from "../services/IWeaponsService";
 import { PositionStyle } from "../styles/styles";
 
-interface WeaponsItemsProps {
+interface WeaponsServiceProps {
     weaponsService: IWeaponsServices;
 }
 
-const WeaponsItems: FC<WeaponsItemsProps> = ({weaponsService}) => {
+const WeaponsItems: FC<WeaponsServiceProps> = ({weaponsService}) => {
 
-    const {loading, weaponsItems} = useWeaponsItems(weaponsService);
+    const {error, loading, weaponsCardsDto, get} = useGetWeaponsCardsDto(process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '');
+    const [weaponsItems, setWeaponsItems] = useState<WeaponsItemProps[]>([])
+
+    useEffect(()=>{
+        (async ()=>{ await get()})();
+    }, [weaponsService]);
+
+    useEffect(()=>{
+        if(weaponsCardsDto?.length)
+            setWeaponsItems(weaponsService.getWeaponsItems(weaponsCardsDto));
+    }, [weaponsCardsDto]);
 
     if (loading) return <Text>...loaded weapons items</Text>;
 
-    // console.log('weapons items', weaponsItems.length);
+    if (error) throw new Error(error);
 
     return (
         <View style={PositionStyle.column}>
-            {weaponsItems.length && weaponsItems.map((item, index) => (
+            {weaponsItems.map((item, index) => (
                 <View key={index+1} style={{backgroundColor: '#dad598', margin: 5, width: '100%'}}>
                     <Text>item{index+1}: {item.model} - {item.price} UAH</Text>
                 </View>

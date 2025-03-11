@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAxiosAdmin from "./useAxiosAdmin";
 import useTokenStorage from "./useTokenStorage";
-import { WeaponsDataDto } from "../types/AdminServerTypes";
+import { WeaponsDataDtoProps } from "../types/AdminServerTypes";
 
 
 const usePostWeaponsModel = (_baseURL: string) => {
@@ -10,7 +10,7 @@ const usePostWeaponsModel = (_baseURL: string) => {
     const [isPost, setIsPost] = useState<boolean>(false);
 
     // post weapons models
-    const post = async (newWeaponsDataDto: WeaponsDataDto) => {
+    const post = async (newWeaponsDataDto: WeaponsDataDtoProps) => {
         treatData({
             route: `new-model/${newWeaponsDataDto.weaponsItem.Model}`,
             method: 'POST',

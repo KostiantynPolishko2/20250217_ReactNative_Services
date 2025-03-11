@@ -1,4 +1,4 @@
-import { WeaponsCardDto } from "../types/AdminServerTypes";
+import { WeaponsCardDtoProps } from "../types/AdminServerTypes";
 
 export type WeaponsItemProps = {
     isVisible: boolean,
@@ -13,7 +13,7 @@ export type WeaponsModelProps = WeaponsItemProps & {
 
 export interface IWeaponsServices {
 
-    getWeaponsItems(): Promise<WeaponsItemProps[]>;
+    getWeaponsItems(weaponsCardDto: WeaponsCardDtoProps[]): WeaponsItemProps[];
 
-    getWeaponsModel(weaponsCardDto: WeaponsCardDto): WeaponsModelProps;
+    getWeaponsModel(weaponsCardDto: WeaponsCardDtoProps): WeaponsModelProps;
 };

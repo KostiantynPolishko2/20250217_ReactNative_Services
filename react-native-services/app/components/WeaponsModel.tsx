@@ -6,12 +6,12 @@ import { weaponsModelDefault } from "../constants/Weapons";
 import useGetWeaponsCardDto from "../hooks/useGetWeaponsCardDto";
 import { WeaponsModelProps } from "../services/IWeaponsService";
 
-interface WeaponsItemsProps {
+interface WeaponsServiceProps {
     weaponsService: IWeaponsServices;
     model: string,
 }
 
-const WeaponsModel: FC<WeaponsItemsProps> = ({weaponsService, model}) => {
+const WeaponsModel: FC<WeaponsServiceProps> = ({weaponsService, model}) => {
 
     const {error, loading, weaponsCardDto, get} = useGetWeaponsCardDto(process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '');
     const [weaponsModel, setWeaponsModel] = useState<WeaponsModelProps>(weaponsModelDefault);
@@ -27,9 +27,7 @@ const WeaponsModel: FC<WeaponsItemsProps> = ({weaponsService, model}) => {
 
     if (loading) return <Text>...loaded weapons model</Text>;
 
-    if (error){
-        throw new Error(error);
-    }
+    if (error) throw new Error(error.message);
 
     return (
             <View style={styles.body}>

@@ -1,4 +1,4 @@
-export type LoginModel = {
+export type LoginModelProps = {
     username: string,
     password: string,
 };

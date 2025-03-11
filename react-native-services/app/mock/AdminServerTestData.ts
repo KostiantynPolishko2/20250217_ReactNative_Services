@@ -1,6 +1,6 @@
-import { WeaponsDataDto } from "../types/AdminServerTypes";
+import { WeaponsDataDtoProps } from "../types/AdminServerTypes";
 
-export const arrNewWeaponsModels: WeaponsDataDto[] = [
+export const arrNewWeaponsModels: WeaponsDataDtoProps[] = [
     {
         weaponsImage: {
             name: 'img_name1',

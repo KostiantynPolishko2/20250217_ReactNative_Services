@@ -15,7 +15,7 @@ const useDeleteWeaponsModel = (_baseURL: string) => {
             data:  {},
             jwt: await getValue()
         });
-        console.log('remove model', response || error);
+        // console.log('remove model', response || error);
     }
 
     useEffect(()=>{

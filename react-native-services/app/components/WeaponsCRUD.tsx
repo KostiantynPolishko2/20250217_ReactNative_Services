@@ -4,21 +4,21 @@ import useDeleteWeaponsModel from "../hooks/useDeleteWeaponsModel";
 import usePostWeaponsModel from "../hooks/usePostWeaponsModel";
 import useGetWeaponsItems from "../hooks/useGetWeaponsItems";
 import useGetWeaponsModel from "../hooks/useGetWeaponsCardDto";
-import useGetWeaponsModels from "../hooks/useGetWeaponsModels";
-import { WeaponsDataDto } from "../types/AdminServerTypes";
+import useGetWeaponsModels from "../hooks/useGetWeaponsCardsDto";
+import { WeaponsDataDtoProps } from "../types/AdminServerTypes";
 import { IconButton } from "../ui/Button";
 
 export const GetModels: FC = () => {
 
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
-    const {weaponsModels, loading, get} = useGetWeaponsModels(_baseURL);
+    const {loading, weaponsCardsDto, get} = useGetWeaponsModels(_baseURL);
 
     return(
         <View style={styles.body}>
             <TouchableOpacity onPress={get}>
                 <IconButton title="GetModels"/>
             </TouchableOpacity>
-            {weaponsModels && <Text>1. {weaponsModels[0].model} - {weaponsModels[0].price}</Text>}
+            {weaponsCardsDto && <Text>1. {weaponsCardsDto[0].model} - {weaponsCardsDto[0].price}</Text>}
             {loading && <Text>...loading</Text>}
         </View>
     );
@@ -68,7 +68,7 @@ export const Delete:FC<{model: string}> = ({model}) => {
     );
 };
 
-export const Post:FC<{weaponsModel:WeaponsDataDto}> = ({weaponsModel}) => {
+export const Post:FC<{weaponsModel:WeaponsDataDtoProps}> = ({weaponsModel}) => {
     const _baseURL = process.env.EXPO_PUBLIC_ASPNET_ADMINSERVER_URL || '';
     const {isPost, loading, post} = usePostWeaponsModel(_baseURL);
 

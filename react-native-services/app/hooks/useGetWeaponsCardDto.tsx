@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import useAxiosAdmin from "./useAxiosAdmin";
-import { WeaponsCardDto } from "../types/AdminServerTypes";
+import { WeaponsCardDtoProps } from "../types/AdminServerTypes";
 import { weaponsCardDtoDefault } from "../constants/Weapons";
 
 const useGetWeaponsCardDto = (_baseURL: string) => {
     const {response, error, loading, treatData} = useAxiosAdmin(_baseURL);
-    const [weaponsCardDto, setWeaponsCardDto] = useState<WeaponsCardDto>(weaponsCardDtoDefault);
+    const [weaponsCardDto, setWeaponsCardDto] = useState<WeaponsCardDtoProps>(weaponsCardDtoDefault);
 
     // get weapons by model
     const get = async (model: string):Promise<void> => {
